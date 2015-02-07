@@ -1,8 +1,5 @@
 
-//Still working on much of the game logic, the details for the kicks and punches need to be entered and likely tweaked
-//need to figure out how to do the logic between switching characters
 //Pess the P key to switch between characters
-//Do not know why my Left animations are bugging out it must be because of the offsets
 //so far I have only implimented strong punch, strong kick, walking, idle, and jumping since its all we need for this part of the project
 function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, animation) {
     this.spriteSheet = spriteSheet;
@@ -17,6 +14,28 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
     this.loop = loop;
     this.reverse = reverse;
     this.animation = animation;
+}
+function Background(game, background) {
+    this.active_background = background;
+    this.x = 0;
+    this.y = 0;
+    this.startX = 0;
+    this.startY = 0;
+    this.game = game;
+    this.ctx = game.ctx;
+}
+
+Background.prototype.draw = function () {
+    console.log(this.active_background);
+    this.ctx.drawImage(this.active_background,
+                  0, 0,  // source from sheet
+                  1350, 600,
+                  0, 0,
+                  1350,
+                  600);
+}
+Background.prototype.update = function () {
+    //do nothing
 }
 
 Animation.prototype.drawFrame = function (game, ctx, x, y, scaleBy) {
@@ -89,6 +108,8 @@ Animation.prototype.drawFrame = function (game, ctx, x, y, scaleBy) {
             offset = 0;
         } else if (this.animation === 32) { // 
             offset = 0;
+        } else {
+            offset = 0;
         }
 
     }
@@ -156,7 +177,7 @@ function Sonic(game) {
     this.vlad_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304/5) * 7, 1536 / 5, 2304 / 5, 0.05, 7, false, true, 22);
 
     this.vlad_blockRightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), (1536/5) * 3, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 23);
-    this.vlad_blockLeftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), (1536 / 5) * 3, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 24);
+    this.vlad_blockLeftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), (1536 / 5) * 5, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 24);
 
 
     /////new controls animation weak punch
@@ -562,6 +583,7 @@ Sonic.prototype.draw = function (ctx) {
        
     }
 
+
     Entity.prototype.draw.call(this);
 }
 
@@ -576,6 +598,8 @@ ASSET_MANAGER.queueDownload("./img/Vlad_Sprite.png");
 //ASSET_MANAGER.queueDownload("./img/Vlad_Sprite2.png");
 ASSET_MANAGER.queueDownload("./img/Vlad_Sprite_reverse.png");
 
+ASSET_MANAGER.queueDownload("./img/staircase.png");
+
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
     var canvas = document.getElementById('gameWorld');
@@ -585,8 +609,12 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
     var sonic = new Sonic(gameEngine);
 
-    gameEngine.addEntity(sonic);
- 
+    
+    
+
     gameEngine.init(ctx);
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/staircase.png")));
+    gameEngine.addEntity(sonic);
+
     gameEngine.start();
 });
