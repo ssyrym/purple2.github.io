@@ -2,10 +2,10 @@
 Assignment for CSS491 'Smackdown in T-Town'
 
 Creators:
-Vladimir Gudzyuk
-John Jackson
-Alex Prokopchik
-Syrym Satanov
+Vladimir Gudzyuk,
+John Jackson,
+Alex Prokopchik,
+Syrym Satanov.
 
 THIS IS AN ASSIGNMENT FOR OUR COMPUTATIONAL WORLDS CLASS AT THE UNIVERSITY OF WASHINGTON TACOMA.  THE CLASS IS TAUGHT BY DR. CHRIS MARRIOT.  THE REQUIREMENT IS THAT IT BE A LAUNCHABLE WEB APP WRITTEN IN JAVASCRIPT.
 
