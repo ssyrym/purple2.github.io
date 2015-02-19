@@ -14,20 +14,20 @@ function Alex( game, isPlayer ) {
 
     /////new controls animation 
     //weak punch
-    this.alex_weak_puch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 650, 251.5, 325, .1, 4, false, false, 9);
-    this.alex_weak_puch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008, 650, 251.5, 325, .1, 4, false, false, 10);
+    this.alex_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 650, 251.5, 325, .1, 4, false, false, 9);
+    this.alex_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008-1002, 650, 251.5, 325, .1, 4, false, false, 0);
 
-    ////// weak kick
+    //weak kick
     this.alex_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 325, 251.5, 325, .1, 4, false, false, 11);
-    this.alex_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008, 325, 251.5, 325, .1, 4, false, false, 12);
+    this.alex_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008-1002, 325, 251.5, 325, .1, 4, false, false, 0);
 
     //strong punch
     this.alex_strong_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 975, 251.5, 325, .1, 4, false, false, 13);
-    this.alex_strong_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008, 975, 251.5, 325, .1, 4, false, true, 14);
+    this.alex_strong_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 975, 251.5, 325, .1, 4, false, true, 0);
 
     //strong kick
     this.alex_strong_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 0, 251.5, 325, .1, 4, false, false, 15);
-    this.alex_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008, 0, 251.5, 325, .1, 4, false, true, 16);
+    this.alex_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008-1002, 0, 251.5, 325, .1, 4, false, true, 0);
 
     //new boolean values added here
     this.weak_punch = false;
@@ -100,10 +100,28 @@ if(this.controlled) {//
         this.sittingLeft = true;
         this.strong_kick = false;
 
-    } else if (this.game.theAPressed ) {//A weak punch
-
-    } else if (this.game.theSPressed ) {//S weak kick
-
+    } else if (this.game.theAPressed) {//A weak punch
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.standingLeft = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.strong_kick = false;
+        this.strong_punch = false;
+        this.weak_kick = false;
+        this.weak_punch = true;
+    } else if (this.game.theSPressed) {//S weak kick
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.standingLeft = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.strong_kick = false;
+        this.strong_punch = false;
+        this.weak_punch = false;
+        this.weak_kick = true;
     } else if (this.game.theDPressed && !this.strong_kick ) {//D Strong punch
         this.rightwalk = false;
         this.leftwalk = false;
@@ -112,6 +130,8 @@ if(this.controlled) {//
         this.sittingRight = false;
         this.sittingLeft = false;
         this.strong_kick = false;
+        this.weak_punch = false;
+        this.weak_kick = false;
         this.strong_punch = true;
     } else if (this.game.theFPressed && !this.strong_punch ) {//F Strong kick
         this.rightwalk = false;
@@ -120,6 +140,8 @@ if(this.controlled) {//
         this.standingLeft = false;
         this.sittingRight = false;
         this.sittingLeft = false;
+        this.weak_punch = false;
+        this.weak_kick = false;
         this.strong_kick = true;
     
     } else if (this.isRight) {//if not any previous actions then just idle to right
@@ -129,6 +151,8 @@ if(this.controlled) {//
         this.standingLeft = false;
         this.sittingRight = false;
         this.sittingLeft = false;
+        this.weak_punch = false;
+        this.weak_kick = false;
     } else if (!this.isRight) {// idle to left
         this.rightwalk = false;
         this.leftwalk = false;
@@ -136,6 +160,8 @@ if(this.controlled) {//
         this.standing = false;
         this.sittingRight = false;
         this.sittingLeft = false;
+        this.weak_punch = false;
+        this.weak_kick = false;
     }
 
 
@@ -196,7 +222,21 @@ if(this.controlled) {//
     }
 
     if (this.weak_punch) {
-
+        if (this.isRight) {
+            if (this.alex_weak_punch_rightAnimation.isDone()) {
+                this.alex_weak_punch_rightAnimation.elapsedTime = 0;
+                this.weak_punch = false;
+                //this.standingLeft = false;
+                this.standing = true;
+            }
+        } else {
+            if (this.alex_weak_punch_leftAnimation.isDone()) {
+                this.alex_weak_punch_leftAnimation.elapsedTime = 0;
+                this.weak_punch = false;
+                //this.standingLeft = true;
+                this.standing = false;
+            }
+        }
     }
 
     if (this.strong_punch) {
@@ -217,7 +257,21 @@ if(this.controlled) {//
 		}
     }
     if (this.weak_kick) {
-
+        if (this.isRight) {
+            if (this.alex_weak_kick_rightAnimation.isDone()) {
+                this.alex_weak_kick_rightAnimation.elapsedTime = 0;
+                this.weak_kick = false;
+                //this.standingLeft = false;
+                this.standing = true;
+            }
+        } else {
+            if (this.alex_weak_kick_leftAnimation.isDone()) {
+                this.alex_weak_kick_leftAnimation.elapsedTime = 0;
+                this.weak_kick = false;
+                //this.standingLeft = true;
+                this.standing = false;
+            }
+        }
     }
     if (this.strong_kick) {
 		if (this.isRight) {
@@ -272,7 +326,19 @@ Alex.prototype.draw = function (ctx) {
     } else if (this.sittingRight) {
 		this.alex_blockRightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
     } else if (this.weak_punch) {
-    }  else if (this.weak_kick) {
+        if (this.isRight) {
+            this.alex_weak_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+        } else if (!this.isRight) {
+            this.alex_weak_punch_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+            //console.log("this.x " + this.x + " this.y " + this.y, +" ");
+        }
+    } else if (this.weak_kick) {
+        if (this.isRight) {
+            this.alex_weak_kick_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+        } else if (!this.isRight) {
+            this.alex_weak_kick_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+            console.log("this.x " + this.x + " this.y " + this.y, +" ");
+        }
     }  else if (this.strong_punch) {
 		if (this.isRight) {
 			this.alex_strong_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
