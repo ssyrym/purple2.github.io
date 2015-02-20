@@ -32,11 +32,12 @@ function Alex( game, isPlayer ) {
     //new boolean values added here
     this.weak_punch = false;
     this.weak_kick = false;
+    /////////////////////////////////////////////Added boolean values^^
     this.strong_punch = false;
     this.strong_kick = false;
     this.current_action = false;
     
-	this.alex = false;
+    this.alex = false;
     this.vlad = true;
     this.john = false;
     this.syrim = false;
@@ -111,6 +112,7 @@ if(this.controlled) {//
         this.strong_punch = false;
         this.weak_kick = false;
         this.weak_punch = true;
+        ////////////////////////////////////////////Added if statement^^
     } else if (this.game.theSPressed) {//S weak kick
         this.rightwalk = false;
         this.leftwalk = false;
@@ -122,6 +124,7 @@ if(this.controlled) {//
         this.strong_punch = false;
         this.weak_punch = false;
         this.weak_kick = true;
+         ////////////////////////////////////////////Added if statement and weak action booleans^^^^
     } else if (this.game.theDPressed && !this.strong_kick ) {//D Strong punch
         this.rightwalk = false;
         this.leftwalk = false;
@@ -132,6 +135,7 @@ if(this.controlled) {//
         this.strong_kick = false;
         this.weak_punch = false;
         this.weak_kick = false;
+        ////////////////////////////////////////////Added weak action booleans^^
         this.strong_punch = true;
     } else if (this.game.theFPressed && !this.strong_punch ) {//F Strong kick
         this.rightwalk = false;
@@ -143,6 +147,7 @@ if(this.controlled) {//
         this.weak_punch = false;
         this.weak_kick = false;
         this.strong_kick = true;
+        ////////////////////////////////////////////Added weak action booleans^^
     
     } else if (this.isRight) {//if not any previous actions then just idle to right
         this.rightwalk = false;
@@ -153,6 +158,7 @@ if(this.controlled) {//
         this.sittingLeft = false;
         this.weak_punch = false;
         this.weak_kick = false;
+         ////////////////////////////////////////////Added weak action booleans^^
     } else if (!this.isRight) {// idle to left
         this.rightwalk = false;
         this.leftwalk = false;
@@ -162,6 +168,7 @@ if(this.controlled) {//
         this.sittingLeft = false;
         this.weak_punch = false;
         this.weak_kick = false;
+        ////////////////////////////////////////////Added weak action booleans^^
     }
 
 
@@ -216,6 +223,7 @@ if(this.controlled) {//
         this.sittingLeft = false;
         this.weak_punch = false;
         this.weak_kick = false;
+        ////////////////////////////////////////////Added weak action booleans^^
         this.strong_punch = false;
         this.strong_kick = false;
 
@@ -238,6 +246,7 @@ if(this.controlled) {//
             }
         }
     }
+    ////////////////////////////////////////////Added if statement^^
 
     if (this.strong_punch) {
 	   if (this.isRight) {
@@ -273,6 +282,7 @@ if(this.controlled) {//
             }
         }
     }
+     ////////////////////////////////////////////Added if statement^^
     if (this.strong_kick) {
 		if (this.isRight) {
 			if (this.alex_strong_kick_rightAnimation.isDone()) {
@@ -332,6 +342,7 @@ Alex.prototype.draw = function (ctx) {
             this.alex_weak_punch_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
             //console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
+         ////////////////////////////////////////////Added if statement^^
     } else if (this.weak_kick) {
         if (this.isRight) {
             this.alex_weak_kick_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
@@ -339,6 +350,7 @@ Alex.prototype.draw = function (ctx) {
             this.alex_weak_kick_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
             console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
+         ////////////////////////////////////////////Added if statement^^
     }  else if (this.strong_punch) {
 		if (this.isRight) {
 			this.alex_strong_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
