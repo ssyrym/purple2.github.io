@@ -9,18 +9,18 @@ function Vlad( game, isPlayer ) {
     this.vlad_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304/5) * 7, 1536 / 5, 2304 / 5, 0.05, 7, false, true, 22);
 
     this.vlad_blockRightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), (1536/5) * 3, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 23);
-    this.vlad_blockLeftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), (1536 / 5) * 5, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 24);
+    this.vlad_blockLeftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), (1536 / 5) * 4, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 24);
 
 
     /////new controls animation weak punch
-    this.vlad_weak_puch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 1756.5, 4200, 1536 / 5, 2304 / 5, 1, 1, true, false, 25);
+    this.vlad_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5) * 2, 1536 / 5, 2304 / 5, .1, 7, false, true, 25);
 
-    this.vlad_weak_puch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 1756.5, 4200, 1536 / 5, 2304 / 5, 1, 1, true, false, 26);
+    this.vlad_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 2, 1536 / 5, 2304 / 5, .1, 7, false, false, 26);
     
 	////// weak kick
-    this.vlad_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 1756.5, 4200, 1536 / 5, 2304 / 5, 1, 1, true, false, 27);
+    this.vlad_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 3, 1536 / 5, 2304 / 5, .1, 7, false, false, 27);
 
-    this.vlad_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 1756.5, 4200, 1536 / 5, 2304 / 5, 1, 1, true, false, 28);
+    this.vlad_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5) * 3, 1536 / 5, 2304 / 5, .1, 7, false, true, 28);
 
     //strong punch
     this.vlad_strong_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 4, 307.2, (2304 / 5), .1, 7, false, false, 29);
@@ -70,22 +70,27 @@ Vlad.prototype.update = function () {
 	if (this.game.thePPressed) {
         this.controlled = !this.controlled;
     }
-if( this.controlled) {//
-    if (this.game.space) this.jumping = true;
-
-    if (this.game.rightArrow) {
+	if( this.controlled) {//
+	    if (this.game.space) {
+	    this.jumping = true;
+	    this.strong_kick = false;
+	    this.strong_punch = false;
+	    this.weak_kick = false;
+	    this.weak_punch = false;
+	}
+    if (this.game.rightArrow && this.current_action === false) {
         this.rightwalk = true;
         this.leftwalk = false;
         this.standing = false;
         this.standingLeft = false;
         this.isRight = true;
-    } else if (this.game.leftArrow) {
+    } else if (this.game.leftArrow && this.current_action === false) {
         this.leftwalk = true;
         this.rightwalk = false;
         this.standing = false;
         this.standingLeft = false;
         this.isRight = false;
-    } else if (this.game.downArrow && this.isRight) {
+    } else if (this.game.downArrow && this.isRight && this.current_action === false) {
         this.rightwalk = false;
         this.leftwalk = false;
         this.standing = false;
@@ -93,7 +98,7 @@ if( this.controlled) {//
         this.sittingRight = true;
         this.sittingLeft = false;
         this.strong_kick = false;
-    } else if (this.game.downArrow && !this.isRight) {
+    } else if (this.game.downArrow && !this.isRight && this.current_action === false) {
         this.rightwalk = false;
         this.leftwalk = false;
         this.standing = false;
@@ -102,11 +107,31 @@ if( this.controlled) {//
         this.sittingLeft = true;
         this.strong_kick = false;
 
-    } else if (this.game.theAPressed ) {//A weak punch
-
-    } else if (this.game.theSPressed ) {//S weak kick
-
-    } else if (this.game.theDPressed && !this.strong_kick ) {//D Strong punch
+    } else if (this.game.theAPressed && this.current_action === false) {//A weak punch
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.standingLeft = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.strong_kick = false;
+        this.strong_punch = false;
+        this.weak_kick = false;
+        this.weak_punch = true;
+        this.current_action = true;
+    } else if (this.game.theSPressed && this.current_action === false) {//S weak kick
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.standingLeft = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.strong_kick = false;
+        this.strong_punch = false;
+        this.weak_punch = false;
+        this.weak_kick = true;
+        this.current_action = true;
+    } else if (this.game.theDPressed && this.current_action === false) {//D Strong punch
         this.rightwalk = false;
         this.leftwalk = false;
         this.standing = false;
@@ -115,7 +140,8 @@ if( this.controlled) {//
         this.sittingLeft = false;
         this.strong_kick = false;
         this.strong_punch = true;
-    } else if (this.game.theFPressed && !this.strong_punch ) {//F Strong kick
+        this.current_action = true;
+    } else if (this.game.theFPressed && this.current_action === false) {//F Strong kick
         this.rightwalk = false;
         this.leftwalk = false;
         this.standing = false;
@@ -123,15 +149,15 @@ if( this.controlled) {//
         this.sittingRight = false;
         this.sittingLeft = false;
         this.strong_kick = true;
-    
-    } else if (this.isRight) {//if not any previous actions then just idle to right
+        this.current_action = true;
+    } else if (this.isRight && this.current_action === false) {//if not any previous actions then just idle to right
         this.rightwalk = false;
         this.leftwalk = false;
         this.standing = true;
         this.standingLeft = false;
         this.sittingRight = false;
         this.sittingLeft = false;
-    } else if (!this.isRight) {// idle to left
+    } else if (!this.isRight && this.current_action === false) {// idle to left
         this.rightwalk = false;
         this.leftwalk = false;
         this.standingLeft = true;
@@ -147,12 +173,16 @@ if( this.controlled) {//
 			if (this.vlad_jumpAnimation.isDone()) {
 				this.vlad_jumpAnimation.elapsedTime = 0;
 				this.jumping = false;
+				this.standing = true;
+				this.current_action = false;
 			}
 			jumpDistance = this.vlad_jumpAnimation.elapsedTime / this.vlad_jumpAnimation.totalTime;
 		} else {
 			if (this.vlad_leftjumpAnimation.isDone()) {
 				this.vlad_leftjumpAnimation.elapsedTime = 0;
 				this.jumping = false;
+				this.standing = false;
+				this.current_action = false;
 			}
 			jumpDistance = this.vlad_leftjumpAnimation.elapsedTime / this.vlad_jumpAnimation.totalTime;
 		}
@@ -196,7 +226,23 @@ if( this.controlled) {//
     }
 
     if (this.weak_punch) {
-
+        if (this.isRight) {
+            if (this.vlad_weak_punch_rightAnimation.isDone()) {
+                this.vlad_weak_punch_rightAnimation.elapsedTime = 0;
+                this.weak_punch = false;
+                //this.standingLeft = false;
+                this.standing = true;
+                this.current_action = false;
+            }
+        } else {
+            if (this.vlad_weak_punch_leftAnimation.isDone()) {
+                this.vlad_weak_punch_leftAnimation.elapsedTime = 0;
+                this.weak_punch = false;
+                //this.standingLeft = true;
+                this.standing = false;
+                this.current_action = false;
+            }
+        }
     }
 
     if (this.strong_punch) {
@@ -206,6 +252,7 @@ if( this.controlled) {//
 				this.strong_punch = false;
 				//this.standingLeft = false;
 				this.standing = true;
+				this.current_action = false;
 			}
 		} else {
 			if (this.vlad_strong_punch_leftAnimation.isDone()) {
@@ -213,11 +260,28 @@ if( this.controlled) {//
 				this.strong_punch = false;
 				//this.standingLeft = true;
 				this.standing = false;
+				this.current_action = false;
 			}
 		}
     }
     if (this.weak_kick) {
-
+        if (this.isRight) {
+            if (this.vlad_weak_kick_rightAnimation.isDone()) {
+                this.vlad_weak_kick_rightAnimation.elapsedTime = 0;
+                this.weak_kick = false;
+                //this.standingLeft = false;
+                this.standing = true;
+                this.current_action = false;
+            }
+        } else {
+            if (this.vlad_weak_kick_leftAnimation.isDone()) {
+                this.vlad_weak_kick_leftAnimation.elapsedTime = 0;
+                this.weak_kick = false;
+                //this.standingLeft = true;
+                this.standing = false;
+                this.current_action = false;
+            }
+        }
     }
     if (this.strong_kick) {
 		if (this.isRight) {
@@ -226,6 +290,7 @@ if( this.controlled) {//
 				this.strong_kick = false;
 				//this.standingLeft = false;
 				this.standing = true;
+				this.current_action = false;
 			}
 		} else {
 			if (this.vlad_strong_kick_leftAnimation.isDone()) {
@@ -233,6 +298,7 @@ if( this.controlled) {//
 				this.strong_kick = false;
 				//this.standingLeft = true;
 				this.standing = false;
+				this.current_action = false;
 			}
 		}
 
@@ -270,13 +336,24 @@ Vlad.prototype.draw = function (ctx) {
     } else if (this.leftwalk) {
 		this.vlad_leftwalkAnim.drawFrame(this.game, ctx, this.x, this.y - 300);
     } else if (this.sittingLeft) {
-		this.vlad_blockLeftAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
+        this.vlad_blockLeftAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
+        console.log("block Left");
     } else if (this.sittingRight) {
 		this.vlad_blockRightAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
     } else if (this.weak_punch) {
-
+        if (this.isRight) {
+            this.vlad_weak_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
+        } else if (!this.isRight) {
+            this.vlad_weak_punch_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
+            //console.log("this.x " + this.x + " this.y " + this.y, +" ");
+        }
     }  else if (this.weak_kick) {
-
+        if (this.isRight) {
+            this.vlad_weak_kick_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
+        } else if (!this.isRight) {
+            this.vlad_weak_kick_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
+            console.log("this.x " + this.x + " this.y " + this.y, +" ");
+        }
     }  else if (this.strong_punch) {
         if (this.isRight) {
 			this.vlad_strong_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 300);
