@@ -42,7 +42,8 @@ function GameEngine() {
     this.downArrow = false;
     this.upArrowPressed = false;
 
-    //A S D F KEYS
+    //A S D F T KEYS
+    this.theTPressed = false;//T key
     this.theAPressed = false;
     this.theSPressed = false;
     this.theDPresed = false;
@@ -86,6 +87,8 @@ GameEngine.prototype.startInput = function () {
             that.theAPressed = true;
         } else if (e.which === 83) {//S key
             that.theSPressed = true;
+        } else if (e.which === 84) {//T key
+            that.theTPressed = true;
         } else if (e.which === 68) {// D key
             that.theDPressed = true;
         } else if (e.which === 70) {// F key
@@ -109,6 +112,8 @@ GameEngine.prototype.startInput = function () {
             that.theAPressed = true;
         } else if (e.which === 83) {//S key
             that.theSPressed = true;
+        } else if (e.which === 84) {//T key
+            that.theTPressed = true;
         } else if (e.which === 68) {// D key
             that.theDPressed = true;
         } else if (e.which === 70) {//F key
@@ -133,6 +138,8 @@ GameEngine.prototype.startInput = function () {
             that.theAPressed = false;
         } else if (e.which === 83) {//S key
             that.theSPressed = false;
+        } else if (e.which === 84) {//T key
+            that.theTPressed = false;
         } else if (e.which === 68) {// D key
             that.theDPressed = false;
         } else if (e.which === 70) {//F KEY
