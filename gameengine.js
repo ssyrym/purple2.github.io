@@ -58,7 +58,7 @@ function GameEngine() {
     this.gameOver = false;
 
     //Fighters
-    this.Fighters = [new John(this, null), new Alex(this, null), new Vlad(this, null)];
+    this.Fighters = [new John(this, null), new Alex(this, null), new Syrym(this, null), new Vlad(this, null)];
     this.selection = null;
 }
 
