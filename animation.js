@@ -45,12 +45,6 @@ Animation.prototype.drawFrame = function (game, ctx, x, y, scaleBy) {
     var locX = x;
     var locY = y;
 
-    if (game.theFPressed && (this.animation === 2 || this.animation === 5)) {
-        yindex = 1;
-    } else {
-        yindex = 0;
-    }
-
     var offset = yindex === 0 ? this.startX : 0;
     if (this.reverse) {
         if (this.animation === 4) {// standing to left
