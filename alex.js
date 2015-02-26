@@ -32,36 +32,34 @@ function Alex(game, isPlayer) {
     //new boolean values added here
     this.weak_punch = false;
     this.weak_kick = false;
-    /////////////////////////////////////////////Added boolean values^^
     this.strong_punch = false;
     this.strong_kick = false;
-    this.current_action = false;
-
-    this.alex = false;
-    this.vlad = true;
-    this.john = false;
-    this.syrim = false;
-    ////////////////////////////////
-
+    
     this.jumping = false;
     this.sittingLeft = false;
     this.sittingRight = false;
-
-    this.standing = true;
     this.rightwalk = false;
-
-    this.standingLeft = false;
     this.leftwalk = false;
-    this.isRight = isPlayer;
+    this.current_action = false;
 
-    this.radius = 100;
-    this.ground = 400;
-    this.controlled = true;
-    Entity.call(this, game, 1100, 400);
+    this.isPlayer = isPlayer;
+    this.game = game;
 }
 
 Alex.prototype = new Entity();
 Alex.prototype.constructor = Alex;
+
+Alex.prototype.updateOrientation = function () {
+    this.standing = this.isPlayer;
+    this.standingLeft = !this.isPlayer;
+    this.isRight = this.isPlayer;
+
+    this.start = this.isPlayer ? 100 : 1000;
+    this.ground = 400;
+    this.controlled = this.isPlayer;
+    Entity.call(this, this.game, this.start, this.ground);
+}
+
 
 Alex.prototype.update = function () {
 
