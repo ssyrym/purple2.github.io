@@ -14,16 +14,16 @@ function Alex(game, isPlayer) {
 
     /////new controls animation 
     //weak punch
-    this.alex_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 640, 251.5, 325, .1, 4, false, false, 9);
-    this.alex_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 640, 251.5, 325, .1, 4, false, true, 0);
+    this.alex_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 650, 251.5, 325, .1, 4, false, false, 9);
+    this.alex_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 650, 251.5, 325, .1, 4, false, true, 0);
 
     //weak kick
-    this.alex_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 315, 251.5, 325, .1, 4, false, false, 11);
-    this.alex_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 315, 251.5, 325, .1, 4, false, true, 0);
+    this.alex_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 325, 251.5, 325, .1, 4, false, false, 11);
+    this.alex_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 325, 251.5, 325, .1, 4, false, true, 0);
 
     //strong punch
-    this.alex_strong_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 962, 251.5, 325, .1, 4, false, false, 13);
-    this.alex_strong_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 962, 251.5, 325, .1, 4, false, true, 0);
+    this.alex_strong_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 975, 251.5, 325, .1, 4, false, false, 13);
+    this.alex_strong_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 975, 251.5, 325, .1, 4, false, true, 0);
 
     //strong kick
     this.alex_strong_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 0, 251.5, 325, .1, 4, false, false, 15);
@@ -34,20 +34,25 @@ function Alex(game, isPlayer) {
     this.weak_kick = false;
     this.strong_punch = false;
     this.strong_kick = false;
-    
+    this.current_action = false;
+    this.gotHit = false;////////////
+
     this.jumping = false;
     this.sittingLeft = false;
+
     this.sittingRight = false;
+    this.standing = true;
+
     this.rightwalk = false;
     this.leftwalk = false;
-    this.current_action = false;
 
-    this.isPlayer = isPlayer;
+    this.myboxes = new Hitbox(game, 2);
+    this.myboxes.setHitbox(this.x + 85, this.y - 140, 110, 300);
     this.game = game;
 }
 
-Alex.prototype = new Entity();
-Alex.prototype.constructor = Alex;
+//Alex.prototype = new Entity();
+//Alex.prototype.constructor = Alex;
 
 Alex.prototype.updateOrientation = function () {
     this.standing = this.isPlayer;
@@ -60,9 +65,12 @@ Alex.prototype.updateOrientation = function () {
     Entity.call(this, this.game, this.start, this.ground);
 }
 
-
 Alex.prototype.update = function () {
-
+    if (this.isRight) {
+        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    } if (!this.isRight) {
+        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    }
     if (this.game.thePPressed) {
         this.controlled = !this.controlled;
     }
@@ -240,6 +248,12 @@ Alex.prototype.update = function () {
 
         if (this.weak_punch) {
             if (this.isRight) {
+                if (this.alex_weak_punch_rightAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.alex_weak_punch_rightAnimation.isDone()) {
                     this.alex_weak_punch_rightAnimation.elapsedTime = 0;
                     this.weak_punch = false;
@@ -248,6 +262,12 @@ Alex.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.alex_weak_punch_leftAnimation.currentFrame() === 3) {//new code from here 3 is the frame it checks for
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// Left weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }//to here
                 if (this.alex_weak_punch_leftAnimation.isDone()) {
                     this.alex_weak_punch_leftAnimation.elapsedTime = 0;
                     this.weak_punch = false;
@@ -261,6 +281,12 @@ Alex.prototype.update = function () {
 
         if (this.strong_punch) {
             if (this.isRight) {
+                if (this.alex_strong_punch_rightAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.alex_strong_punch_rightAnimation.isDone()) {
                     this.alex_strong_punch_rightAnimation.elapsedTime = 0;
                     this.strong_punch = false;
@@ -269,6 +295,12 @@ Alex.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.alex_strong_punch_leftAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.alex_strong_punch_leftAnimation.isDone()) {
                     this.alex_strong_punch_leftAnimation.elapsedTime = 0;
                     this.strong_punch = false;
@@ -280,6 +312,12 @@ Alex.prototype.update = function () {
         }
         if (this.weak_kick) {
             if (this.isRight) {
+                if (this.alex_weak_kick_rightAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.alex_weak_kick_rightAnimation.isDone()) {
                     this.alex_weak_kick_rightAnimation.elapsedTime = 0;
                     this.weak_kick = false;
@@ -288,6 +326,12 @@ Alex.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.alex_weak_kick_leftAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.alex_weak_kick_leftAnimation.isDone()) {
                     this.alex_weak_kick_leftAnimation.elapsedTime = 0;
                     this.weak_kick = false;
@@ -300,6 +344,12 @@ Alex.prototype.update = function () {
         ////////////////////////////////////////////Added if statement^^
         if (this.strong_kick) {
             if (this.isRight) {
+                if (this.alex_strong_kick_rightAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.alex_strong_kick_rightAnimation.isDone()) {
                     this.alex_strong_kick_rightAnimation.elapsedTime = 0;
                     this.strong_kick = false;
@@ -308,6 +358,12 @@ Alex.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.alex_strong_kick_leftAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.alex_strong_kick_leftAnimation.isDone()) {
                     this.alex_strong_kick_leftAnimation.elapsedTime = 0;
                     this.strong_kick = false;
@@ -318,26 +374,27 @@ Alex.prototype.update = function () {
             }
         }
 
-        if (this.rightwalk) {
+        if (this.rightwalk && this.x <= 1350) {
             this.x += 3;
-            //if(this.game.theFPressed){
-            //    this.x += 6;
-            //} else {
-            //    this.x += 3;
-            //}
-        } else if (this.leftwalk) {
+            
+        } else if (this.leftwalk && this.x>=-100) {
             this.x -= 3;
-            //if(this.game.theFPressed){
-            //    this.x -= 6;
-            //} else {
-            //    this.x -= 3;
-            //}
+            
         }
+        
     }//
-    Entity.prototype.update.call(this);
+    //Entity.prototype.update.call(this);
 }
 
 Alex.prototype.draw = function (ctx) {
+    ctx.fillStyle = "DarkGreen";
+    ctx.fillRect(this.myboxes.hitbox.x, this.myboxes.hitbox.y, this.myboxes.hitbox.width, this.myboxes.hitbox.height);
+    Entity.prototype.draw.call(this);
+    if (this.current_action) {
+        ctx.fillStyle = "Red";
+        ctx.fillRect(this.myboxes.attackbox.x, this.myboxes.attackbox.y, this.myboxes.attackbox.width, this.myboxes.attackbox.height);
+        Entity.prototype.draw.call(this);
+    }
     if (this.jumping) {
         if (this.isRight) {
             this.alex_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
