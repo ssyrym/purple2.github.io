@@ -250,7 +250,7 @@ Vlad.prototype.update = function () {
             }
         } else {
             if (this.vlad_weak_punch_leftAnimation.currentFrame() === 3) {//new code from here 3 is the frame it checks for
-                this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// Left weak punch hitbox set****
+                this.myboxes.setAttackBox(this.x + 80, this.y - 120, 125, 45);// Left weak punch hitbox set****
                 this.myboxes.setAttack();
                 this.myboxes.attackenemy();
                 this.myboxes.unsetAttack();
