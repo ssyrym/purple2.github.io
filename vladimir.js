@@ -9,7 +9,7 @@ function Vlad(game, isPlayer) {
     this.vlad_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304/5) * 7, 1536 / 5, 2304 / 5, 0.05, 7, false, true, 22);
 
     this.vlad_blockRightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), (1536/5) * 3, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 23);
-    this.vlad_blockLeftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), (1536 / 5) * 4, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 24);
+    this.vlad_blockLeftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), (1536 / 5) * 4, (2304 / 5) * 6, 1536 / 5, 2304 / 5, 1, 1, true, true, 0);
 
     /////new controls animation weak punch
     this.vlad_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5) * 2, 1536 / 5, 2304 / 5, .1, 7, false, true, 25);
