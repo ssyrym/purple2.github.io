@@ -58,7 +58,7 @@ Syrym.prototype.updateOrientation = function () {
     this.isRight = this.isPlayer;
 
     this.start = this.isPlayer ? 100 : 1000;
-    this.ground = 410;
+    this.ground = 360;
     this.controlled = this.isPlayer;
     Entity.call(this, this.game, this.start, this.ground);
 }
