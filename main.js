@@ -16,8 +16,8 @@ ASSET_MANAGER.queueDownload("./img/John_Sprites_Left.png");
 ASSET_MANAGER.queueDownload("./img/Vlad_Sprite.png");
 ASSET_MANAGER.queueDownload("./img/Vlad_Sprite_reverse.png");
 
-ASSET_MANAGER.queueDownload("./img/syrym1reversed.png");
 ASSET_MANAGER.queueDownload("./img/syrym1.png");
+ASSET_MANAGER.queueDownload("./img/syrym1reversed.png");
 
 ASSET_MANAGER.queueDownload("./img/char_select.png");
 ASSET_MANAGER.queueDownload("./img/staircase.png");
