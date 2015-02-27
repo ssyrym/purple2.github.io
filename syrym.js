@@ -44,9 +44,12 @@ function Syrym(game, isPlayer) {
     this.rightwalk = false;
     this.leftwalk = false;
     this.current_action = false;
+    this.gotHit = false;
 
     this.isPlayer = isPlayer;
     this.game = game;
+    this.myboxes = new Hitbox(game, 4);
+    this.myboxes.setHitbox(this.x + 75, this.y - 140, 125, 300);
 }
 
 Syrym.prototype = new Entity();
@@ -58,13 +61,17 @@ Syrym.prototype.updateOrientation = function () {
     this.isRight = this.isPlayer;
 
     this.start = this.isPlayer ? 100 : 1000;
-    this.ground = 360;
+    this.ground = 410;
     this.controlled = this.isPlayer;
     Entity.call(this, this.game, this.start, this.ground);
 }
 
 Syrym.prototype.update = function () {
-
+    if (this.isRight) {
+        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    } if (!this.isRight) {
+        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    }
     if (this.game.thePPressed) {
         this.controlled = !this.controlled;
     }
@@ -213,18 +220,10 @@ Syrym.prototype.update = function () {
             this.y = this.ground - height;
             if (this.game.rightArrow) {
                 this.x += 10;
-                //if(this.game.theFPressed){
-                //    this.x += 15;
-                //} else {
-                //    this.x += 10;
-                //}
+                
             } else if (this.game.leftArrow) {
                 this.x -= 10;
-                //    if(this.game.theFPressed){
-                //        this.x -= 15;
-                //    } else {
-                //        this.x -= 10;
-                //    }
+                
             }
             this.leftwalk = false;
             this.rightwalk = false;
@@ -242,6 +241,12 @@ Syrym.prototype.update = function () {
 
         if (this.weak_punch) {
             if (this.isRight) {
+                if (this.syrym_weak_punch_rightAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.syrym_weak_punch_rightAnimation.isDone()) {
                     this.syrym_weak_punch_rightAnimation.elapsedTime = 0;
                     this.weak_punch = false;
@@ -250,6 +255,12 @@ Syrym.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.syrym_weak_punch_leftAnimation.currentFrame() === 3) {//new code from here 3 is the frame it checks
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// Left weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }//to here
                 if (this.syrym_weak_punch_leftAnimation.isDone()) {
                     this.syrym_weak_punch_leftAnimation.elapsedTime = 0;
                     this.weak_punch = false;
@@ -259,10 +270,15 @@ Syrym.prototype.update = function () {
                 }
             }
         }
-        ////////////////////////////////////////////Added if statement^^
 
         if (this.strong_punch) {
             if (this.isRight) {
+                if (this.syrym_strong_punch_rightAnimation.currentFrame() === 3) {//adjust hitbox stuff here
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.syrym_strong_punch_rightAnimation.isDone()) {
                     this.syrym_strong_punch_rightAnimation.elapsedTime = 0;
                     this.strong_punch = false;
@@ -271,6 +287,12 @@ Syrym.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.syrym_strong_punch_leftAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.syrym_strong_punch_leftAnimation.isDone()) {
                     this.syrym_strong_punch_leftAnimation.elapsedTime = 0;
                     this.strong_punch = false;
@@ -282,6 +304,12 @@ Syrym.prototype.update = function () {
         }
         if (this.weak_kick) {
             if (this.isRight) {
+                if (this.syrym_weak_kick_rightAnimation.currentFrame() === 3) {//set it to the right frame you want<==========
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.syrym_weak_kick_rightAnimation.isDone()) {
                     this.syrym_weak_kick_rightAnimation.elapsedTime = 0;
                     this.weak_kick = false;
@@ -290,6 +318,12 @@ Syrym.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.syrym_weak_kick_leftAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.syrym_weak_kick_leftAnimation.isDone()) {
                     this.syrym_weak_kick_leftAnimation.elapsedTime = 0;
                     this.weak_kick = false;
@@ -302,6 +336,12 @@ Syrym.prototype.update = function () {
         ////////////////////////////////////////////Added if statement^^
         if (this.strong_kick) {
             if (this.isRight) {
+                if (this.syrym_strong_kick_rightAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.syrym_strong_kick_rightAnimation.isDone()) {
                     this.syrym_strong_kick_rightAnimation.elapsedTime = 0;
                     this.strong_kick = false;
@@ -310,6 +350,12 @@ Syrym.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.syrym_strong_kick_leftAnimation.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.syrym_strong_kick_leftAnimation.isDone()) {
                     this.syrym_strong_kick_leftAnimation.elapsedTime = 0;
                     this.strong_kick = false;
@@ -320,26 +366,28 @@ Syrym.prototype.update = function () {
             }
         }
 
-        if (this.rightwalk) {
+        if (this.rightwalk && this.x <= 1350) {// adjust bounds for your character walking off screen to right
             this.x += 3;
-            //if(this.game.theFPressed){
-            //    this.x += 6;
-            //} else {
-            //    this.x += 3;
-            //}
-        } else if (this.leftwalk) {
+
+        } else if (this.leftwalk && this.x >= -100) {// adjust bound for your char for walking to left
             this.x -= 3;
-            //if(this.game.theFPressed){
-            //    this.x -= 6;
-            //} else {
-            //    this.x -= 3;
-            //}
+
         }
     }//
-    Entity.prototype.update.call(this);
+    //Entity.prototype.update.call(this);
 }
 
 Syrym.prototype.draw = function (ctx) {
+
+    ctx.fillStyle = "DarkGreen";
+    ctx.fillRect(this.myboxes.hitbox.x, this.myboxes.hitbox.y, this.myboxes.hitbox.width, this.myboxes.hitbox.height);
+    Entity.prototype.draw.call(this);
+    if (this.current_action) {
+        ctx.fillStyle = "Red";
+        ctx.fillRect(this.myboxes.attackbox.x, this.myboxes.attackbox.y, this.myboxes.attackbox.width, this.myboxes.attackbox.height);
+        Entity.prototype.draw.call(this);
+    }
+
     if (this.jumping) {
         if (this.isRight) {
             this.syrym_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
