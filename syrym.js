@@ -14,16 +14,16 @@ function Syrym(game, isPlayer) {
 
     /////new controls animation
     //weak punch
-    this.syrym_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 3690, 1200, 410, 400, 0.07, 5, false, false, 9);
-    this.syrym_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 0, 1200, 410, 400, 0.07, 5, false, true, 0);
+    this.syrym_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 3690, 1200, 410, 400, 0.14, 5, false, false, 9);
+    this.syrym_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 0, 1200, 410, 400, 0.14, 5, false, true, 0);
 
     //weak kick
-    this.syrym_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2870, 1600, 410, 400, 0.07, 6, false, false, 11);
-    this.syrym_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 410, 1600, 410, 400, 0.07, 6, false, true, 0);
+    this.syrym_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2870, 1600, 410, 400, 0.1, 6, false, false, 11);
+    this.syrym_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 410, 1600, 410, 400, 0.1, 6, false, true, 0);
 
     //strong punch
-    this.syrym_strong_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 3690, 2000, 410, 400, 0.07, 5, false, false, 13);
-    this.syrym_strong_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 0, 2000, 410, 400, 0.07, 5, false, true, 0);
+    this.syrym_strong_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 3690, 2000, 410, 400, 0.1, 5, false, false, 13);
+    this.syrym_strong_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 0, 2000, 410, 400, 0.1, 5, false, true, 0);
 
     //strong kick
     this.syrym_strong_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 1600, 410, 400, 0.1, 6, false, false, 15);
