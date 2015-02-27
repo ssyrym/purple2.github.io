@@ -43,11 +43,11 @@ function John(game, isPlayer) {
     this.leftwalk = false;
     this.current_action = false;
     this.gotHit = false;
-
-    this.myboxes = new Hitbox(game, 3);//new hitbox
-    this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
     this.isPlayer = isPlayer;
     this.game = game;
+    this.myboxes = new Hitbox(game, 3);//new hitbox
+    this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    
 }
 
 John.prototype = new Entity();
