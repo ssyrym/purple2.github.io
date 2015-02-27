@@ -42,12 +42,14 @@ function GameEngine() {
     this.downArrow = false;
     this.upArrowPressed = false;
 
-    //A S D F KEYS
+    //A S D F T KEYS
+    this.theTPressed = false;//T key
     this.theAPressed = false;
     this.theSPressed = false;
     this.theDPresed = false;
     this.theFPressed = false;
     this.thePPressed = false;
+
     this.rightPressed = false;
     this.leftPressed = false;
 
@@ -71,22 +73,14 @@ GameEngine.prototype.init = function (ctx) {
     console.log('game initialized');
 }
 
-/*
-GameEngine.prototype.setFigthers = function (fighters) {
-    this.Fighters = fighters;
-}
-*/
-
 GameEngine.prototype.start = function () {
     console.log("starting game");
     var that = this;
-
-
     (function gameLoop() {
-        if ( that.inMenu ) {
+        if (that.inMenu) {
             that.getSelections();
-        } else if ( that.inFight ) {
-            console.log("In gameLoop inFight");
+        } else if (that.inFight) {
+            //console.log("In gameLoop inFight");
             that.loop();
             requestAnimFrame(gameLoop, that.ctx.canvas);
         }
@@ -101,7 +95,7 @@ GameEngine.prototype.setFighters = function (selection) {
     var opponentIndex = selection;
 
     while (selection === opponentIndex) {
-        opponentIndex = Math.floor(Math.random() * this.Fighters.length); 
+        opponentIndex = Math.floor(Math.random() * this.Fighters.length);
     }
 
     this.Opponent = this.Fighters[opponentIndex];
@@ -126,7 +120,7 @@ GameEngine.prototype.getSelections = function () {
     console.log('In menu');
 
     var that = this;
-    
+
     this.ctx.canvas.addEventListener("click", function (e) {
         if (that.inMenu) {
             console.log(Math.floor(e.clientX / 250));
@@ -152,7 +146,7 @@ GameEngine.prototype.getSelections = function () {
 GameEngine.prototype.startInput = function () {
     console.log('Starting input');
     var that = this;
-    
+
     this.ctx.canvas.addEventListener("keydown", function (e) {
         if (e.which === 32) {
             that.space = true;
@@ -164,6 +158,8 @@ GameEngine.prototype.startInput = function () {
             that.theAPressed = true;
         } else if (e.which === 83) {//S key
             that.theSPressed = true;
+        } else if (e.which === 84) {//T key
+            that.theTPressed = true;
         } else if (e.which === 68) {// D key
             that.theDPressed = true;
         } else if (e.which === 70) {// F key
@@ -175,9 +171,9 @@ GameEngine.prototype.startInput = function () {
         } else if (e.which === 40) {
             that.downArrow = true;
         }
-        e.preventDefault();
-        console.log(e.which);
-    }, false);
+            e.preventDefault();
+
+        }, false);
     this.ctx.canvas.addEventListener("keypress", function (e) {
         if (e.which === 39) {
             that.rightPressed = true;
@@ -187,12 +183,14 @@ GameEngine.prototype.startInput = function () {
             that.theAPressed = true;
         } else if (e.which === 83) {//S key
             that.theSPressed = true;
+        } else if (e.which === 84) {//T key
+            that.theTPressed = true;
         } else if (e.which === 68) {// D key
             that.theDPressed = true;
         } else if (e.which === 70) {//F key
             that.theFPressed = true;
         } else if (e.which === 80) { // P key
-            that.thePPressed = true;
+            //that.thePPressed = true;
         } else if (e.which === 38) {
             that.upArrowPressed = true;
         } else if (e.which === 40) {
@@ -211,6 +209,8 @@ GameEngine.prototype.startInput = function () {
             that.theAPressed = false;
         } else if (e.which === 83) {//S key
             that.theSPressed = false;
+        } else if (e.which === 84) {//T key
+            that.theTPressed = false;
         } else if (e.which === 68) {// D key
             that.theDPressed = false;
         } else if (e.which === 70) {//F KEY
