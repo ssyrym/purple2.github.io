@@ -42,7 +42,10 @@ function John(game, isPlayer) {
     this.rightwalk = false;
     this.leftwalk = false;
     this.current_action = false;
+    this.gotHit = false;
 
+    this.myboxes = new Hitbox(game, 3);//new hitbox
+    this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
     this.isPlayer = isPlayer;
     this.game = game;
 }
@@ -62,7 +65,11 @@ John.prototype.updateOrientation = function () {
 }
 
 John.prototype.update = function () {
-
+    if (this.isRight) {
+        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    } if (!this.isRight) {
+        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    }
     if (this.game.thePPressed) {
         this.controlled = !this.controlled;
     }
@@ -211,18 +218,10 @@ John.prototype.update = function () {
             this.y = this.ground - height;
             if (this.game.rightArrow) {
                 this.x += 10;
-                //if(this.game.theFPressed){
-                //    this.x += 15;
-                //} else {
-                //    this.x += 10;
-                //}
+                
             } else if (this.game.leftArrow) {
                 this.x -= 10;
-                //    if(this.game.theFPressed){
-                //        this.x -= 15;
-                //    } else {
-                //        this.x -= 10;
-                //    }
+                
             }
             this.leftwalk = false;
             this.rightwalk = false;
@@ -240,27 +239,41 @@ John.prototype.update = function () {
 
         if (this.weak_punch) {
             if (this.isRight) {
+                if (this.wkPunchRight.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.wkPunchRight.isDone()) {
                     this.wkPunchRight.elapsedTime = 0;
                     this.weak_punch = false;
-                    //this.standingLeft = false;
                     this.standing = true;
                     this.current_action = false;
                 }
             } else {
+                if (this.wkPunchLeft.currentFrame() === 3) {//new code from here 3 is the frame it checks for
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// Left weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }//to here
                 if (this.wkPunchLeft.isDone()) {
                     this.wkPunchLeft.elapsedTime = 0;
                     this.weak_punch = false;
-                    //this.standingLeft = true;
                     this.standing = false;
                     this.current_action = false;
                 }
             }
         }
-        ////////////////////////////////////////////Added if statement^^
-
         if (this.strong_punch) {
             if (this.isRight) {
+                if (this.strPunchRight.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.strPunchRight.isDone()) {
                     this.strPunchRight.elapsedTime = 0;
                     this.strong_punch = false;
@@ -269,10 +282,15 @@ John.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.strPunchLeft.currentFrame() === 3) {//hitbox here check frame and change to what you want
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.strPunchLeft.isDone()) {
                     this.strPunchLeft.elapsedTime = 0;
                     this.strong_punch = false;
-                    //this.standingLeft = true;
                     this.standing = false;
                     this.current_action = false;
                 }
@@ -280,6 +298,12 @@ John.prototype.update = function () {
         }
         if (this.weak_kick) {
             if (this.isRight) {
+                if (this.wkKickRight.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.wkKickRight.isDone()) {
                     this.wkKickRight.elapsedTime = 0;
                     this.weak_kick = false;
@@ -288,6 +312,12 @@ John.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.wkKickLeft.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.wkKickLeft.isDone()) {
                     this.wkKickLeft.elapsedTime = 0;
                     this.weak_kick = false;
@@ -300,6 +330,12 @@ John.prototype.update = function () {
         ////////////////////////////////////////////Added if statement^^
         if (this.strong_kick) {
             if (this.isRight) {
+                if (this.strKickRight.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.strKickRight.isDone()) {
                     this.strKickRight.elapsedTime = 0;
                     this.strong_kick = false;
@@ -308,6 +344,12 @@ John.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
+                if (this.strKickLeft.currentFrame() === 3) {
+                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttack();
+                    this.myboxes.attackenemy();
+                    this.myboxes.unsetAttack();
+                }
                 if (this.strKickLeft.isDone()) {
                     this.strKickLeft.elapsedTime = 0;
                     this.strong_kick = false;
@@ -320,24 +362,25 @@ John.prototype.update = function () {
 
         if (this.rightwalk) {
             this.x += 3;
-            //if(this.game.theFPressed){
-            //    this.x += 6;
-            //} else {
-            //    this.x += 3;
-            //}
+            
         } else if (this.leftwalk) {
             this.x -= 3;
-            //if(this.game.theFPressed){
-            //    this.x -= 6;
-            //} else {
-            //    this.x -= 3;
-            //}
+            
         }
+        
     }//
-    Entity.prototype.update.call(this);
+    //Entity.prototype.update.call(this);
 }
 
 John.prototype.draw = function (ctx) {
+    ctx.fillStyle = "DarkGreen";
+    ctx.fillRect(this.myboxes.hitbox.x, this.myboxes.hitbox.y, this.myboxes.hitbox.width, this.myboxes.hitbox.height);
+    Entity.prototype.draw.call(this);
+    if (this.current_action) {
+        ctx.fillStyle = "Red";
+        ctx.fillRect(this.myboxes.attackbox.x, this.myboxes.attackbox.y, this.myboxes.attackbox.width, this.myboxes.attackbox.height);
+        Entity.prototype.draw.call(this);
+    }
     if (this.jumping) {
         if (this.isRight) {
             this.jumpRight.drawFrame(this.game, ctx, this.x, this.y - 190);
