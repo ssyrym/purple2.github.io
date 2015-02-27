@@ -1,10 +1,10 @@
 function Vlad(game, isPlayer) {
     //Vlad Sprite
-    this.vlad_standingAnim = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304/5), 1536/5, 2304/5, .35, 7, true, false, 17);
+    this.vlad_standingAnim = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304/5), 1536/5, 2304/5, .2, 7, true, false, 17);
     this.vlad_rightwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, 0, 1536 / 5, 2304 / 5, 0.1, 7, true, false, 18);
     this.vlad_jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304/5) * 7, 1536 / 5, 2304 / 5, 0.09, 5, false, false, 19);
 
-    this.vlad_standingLeftAnim = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5), 1536 / 5, 2304 / 5, .15, 7, true, true, 20);
+    this.vlad_standingLeftAnim = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5), (1536 / 5)+1, 2304 / 5, .2, 7, true, true, 20);
     this.vlad_leftwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), (1536 / 5) * 6, 0, 1536 / 5, 2304 / 5, 0.1, 8, true, true, 21);
     this.vlad_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304/5) * 7, 1536 / 5, 2304 / 5, 0.05, 7, false, true, 22);
 
@@ -19,16 +19,16 @@ function Vlad(game, isPlayer) {
 	////// weak kick
     this.vlad_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 3, 1536 / 5, 2304 / 5, .1, 7, false, false, 27);
 
-    this.vlad_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 25, (2304 / 5) * 3, 1536 / 5, 2304 / 5, .1, 7, false, true, 28);
+    this.vlad_weak_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 25, (2304 / 5) * 3, (1536 / 5)+7, 2304 / 5, .1, 7, false, true, 28);
 
     //strong punch
     this.vlad_strong_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 4, 307.2, (2304 / 5), .1, 7, false, false, 29);
 
     this.vlad_strong_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5) * 4, (1536 / 5), (2304 / 5), .1, 7, false, true, 30);
     //strong kick
-    this.vlad_strong_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 5, 307.2, 2304 / 5, .1, 7, false, false, 31);
+    this.vlad_strong_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 5, (307.2)+2, 2304 / 5, .1, 7, false, false, 31);
 
-    this.vlad_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5) *5, 1536 / 5, 2304 / 5, .1, 7, false, true, 32);
+    this.vlad_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5) *5, (1536 / 5)+2, 2304 / 5, .1, 7, false, true, 32);
 
     //new boolean values added here
     this.weak_punch = false;
