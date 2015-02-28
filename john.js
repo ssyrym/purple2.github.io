@@ -1,12 +1,12 @@
 function John(game, isPlayer) {
     //John Sprite
     this.idleRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, -20, 100, 290, .3, 5, true, false, 0);
-    this.walkRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 260, 140, 280, 0.1, 12, true, false, 0);
-    this.jumpRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 870, 140, 280, 0.15, 5, false, false, 0);
+    this.walkRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 260, 140, 280, 0.07, 12, true, false, 0);
+    this.jumpRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 870, 140, 280, 0.1, 5, false, false, 0);
 
     this.idleLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 2020, -20, 100, 290, .3, 5, true, false, 0);
-    this.walkLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 840, 260, 140, 280, 0.1, 12, true, false, 0);
-    this.jumpLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1820, 870, 140, 280, 0.15, 5, false, true, 0);
+    this.walkLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 840, 260, 140, 280, 0.07, 12, true, false, 0);
+    this.jumpLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1820, 870, 140, 280, 0.1, 5, false, true, 0);
 
     this.blockRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 1610, 100, 280, 1, 1, true, false, 0);
     this.blockLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 2420, 1610, 100, 280, 1, 1, true, false, 0);
@@ -16,16 +16,16 @@ function John(game, isPlayer) {
 
     /////new controls animation 
     //weak punch
-    this.wkPunchRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 1890, 180, 280, .06, 11, false, false, 0);
-    this.wkPunchLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 540, 1890, 180, 280, .06, 11, false, true, 0);
+    this.wkPunchRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 1890, 180, 280, .03, 11, false, false, 0);
+    this.wkPunchLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 540, 1890, 180, 280, .03, 11, false, true, 0);
 
     ////// weak kick
-    this.wkKickRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 2450, 200, 280, .1, 12, false, false, 0);
-    this.wkKickLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 120, 2450, 200, 280, .1, 12, false, true, 0);
+    this.wkKickRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 2450, 200, 280, .03, 12, false, false, 0);
+    this.wkKickLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 120, 2450, 200, 280, .03, 12, false, true, 0);
 
     //strong punch
-    this.strPunchRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 2170, 200, 280, .1, 6, false, false, 0);
-    this.strPunchLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1320, 2170, 200, 280, .1, 6, false, true, 0);
+    this.strPunchRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 2170, 200, 280, .07, 6, false, false, 0);
+    this.strPunchLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1320, 2170, 200, 280, .07, 6, false, true, 0);
 
     //strong kick
     this.strKickRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 2730, 274, 280, .07, 9, false, false, 0);
@@ -45,13 +45,14 @@ function John(game, isPlayer) {
     this.gotHit = false;
     this.isPlayer = isPlayer;
     this.game = game;
-    this.myboxes = new Hitbox(game, 3);//new hitbox
-    this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
-    
+    this.myboxes = new Hitbox(game, 3);
+    this.bar;
 }
 
 John.prototype = new Entity();
 John.prototype.constructor = John;
+
+John.prototype.loadEnergyBar = function ( energy_bar ) { this.bar = energy_bar }
 
 John.prototype.updateOrientation = function () {
     this.standing = this.isPlayer;
@@ -61,14 +62,16 @@ John.prototype.updateOrientation = function () {
     this.start = this.isPlayer ? 100 : 1000;
     this.ground = 440;
     this.controlled = this.isPlayer;
+    
+
     Entity.call(this, this.game, this.start, this.ground);
 }
 
 John.prototype.update = function () {
     if (this.isRight) {
-        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+        this.myboxes.setHitbox(this.x + 20, this.y - 130, 70, 250);
     } if (!this.isRight) {
-        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+        this.myboxes.setHitbox(this.x + 10, this.y - 130, 70, 250);
     }
     if (this.game.thePPressed) {
         this.controlled = !this.controlled;
@@ -201,6 +204,8 @@ John.prototype.update = function () {
                 if (this.jumpLeft.isDone()) {
                     this.jumpLeft.elapsedTime = 0;
                     this.jumping = false;
+                    this.standingLeft = true;
+                    this.current_action = false;
                 }
                 jumpDistance = this.jumpLeft.elapsedTime / this.jumpRight.totalTime;
             }
@@ -239,8 +244,8 @@ John.prototype.update = function () {
 
         if (this.weak_punch) {
             if (this.isRight) {
-                if (this.wkPunchRight.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                if (this.wkPunchRight.currentFrame() === 10) {
+                    this.myboxes.setAttackBox(this.x + 92, this.y - 100, 80, 25);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -252,8 +257,8 @@ John.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
-                if (this.wkPunchLeft.currentFrame() === 3) {//new code from here 3 is the frame it checks for
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// Left weak punch hitbox set****
+                if (this.wkPunchLeft.currentFrame() === 10) {//new code from here 3 is the frame it checks for
+                    this.myboxes.setAttackBox(this.x, this.y - 100, -80, 25);// Left weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -268,8 +273,8 @@ John.prototype.update = function () {
         }
         if (this.strong_punch) {
             if (this.isRight) {
-                if (this.strPunchRight.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                if (this.strPunchRight.currentFrame() === 5) {
+                    this.myboxes.setAttackBox(this.x + 125, this.y - 120, 76, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -282,8 +287,8 @@ John.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
-                if (this.strPunchLeft.currentFrame() === 3) {//hitbox here check frame and change to what you want
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                if (this.strPunchLeft.currentFrame() === 5) {//hitbox here check frame and change to what you want
+                    this.myboxes.setAttackBox(this.x - 75, this.y - 120, 76, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -298,8 +303,8 @@ John.prototype.update = function () {
         }
         if (this.weak_kick) {
             if (this.isRight) {
-                if (this.wkKickRight.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                if (this.wkKickRight.currentFrame() === 11) {
+                    this.myboxes.setAttackBox(this.x + 90, this.y + 35, 65, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -312,8 +317,8 @@ John.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
-                if (this.wkKickLeft.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                if (this.wkKickLeft.currentFrame() === 11) {
+                    this.myboxes.setAttackBox(this.x - 60, this.y + 35, 60, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -330,8 +335,8 @@ John.prototype.update = function () {
         ////////////////////////////////////////////Added if statement^^
         if (this.strong_kick) {
             if (this.isRight) {
-                if (this.strKickRight.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                if (this.strKickRight.currentFrame() === 8) {
+                    this.myboxes.setAttackBox(this.x + 75, this.y - 45, 120, 35);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -344,8 +349,8 @@ John.prototype.update = function () {
                     this.current_action = false;
                 }
             } else {
-                if (this.strKickLeft.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                if (this.strKickLeft.currentFrame() === 8) {
+                    this.myboxes.setAttackBox(this.x - 95, this.y - 45, 120, 35);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -381,6 +386,7 @@ John.prototype.draw = function (ctx) {
         ctx.fillRect(this.myboxes.attackbox.x, this.myboxes.attackbox.y, this.myboxes.attackbox.width, this.myboxes.attackbox.height);
         Entity.prototype.draw.call(this);
     }
+
     if (this.jumping) {
         if (this.isRight) {
             this.jumpRight.drawFrame(this.game, ctx, this.x, this.y - 190);
@@ -399,15 +405,15 @@ John.prototype.draw = function (ctx) {
         if (this.isRight) {
             this.wkPunchRight.drawFrame(this.game, ctx, this.x, this.y - 150);
         } else if (!this.isRight) {
-            this.wkPunchLeft.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.wkPunchLeft.drawFrame(this.game, ctx, this.x - 90, this.y - 150);
             //console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
         ////////////////////////////////////////////Added if statement^^
     } else if (this.weak_kick) {
         if (this.isRight) {
-            this.wkKickRight.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.wkKickRight.drawFrame(this.game, ctx, this.x - 40, this.y - 150);
         } else if (!this.isRight) {
-            this.wkKickLeft.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.wkKickLeft.drawFrame(this.game, ctx, this.x - 70, this.y - 150);
             console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
         ////////////////////////////////////////////Added if statement^^
@@ -415,14 +421,14 @@ John.prototype.draw = function (ctx) {
         if (this.isRight) {
             this.strPunchRight.drawFrame(this.game, ctx, this.x, this.y - 150);
         } else if (!this.isRight) {
-            this.strPunchLeft.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.strPunchLeft.drawFrame(this.game, ctx, this.x - 80, this.y - 150);
             //console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
     } else if (this.strong_kick) {
         if (this.isRight) {
-            this.strKickRight.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.strKickRight.drawFrame(this.game, ctx, this.x - 80, this.y - 150);
         } else if (!this.isRight) {
-            this.strKickLeft.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.strKickLeft.drawFrame(this.game, ctx, this.x - 100, this.y - 150);
             console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
     } else if (this.standing) {//////////////////////////////////////
