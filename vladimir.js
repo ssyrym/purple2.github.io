@@ -50,16 +50,18 @@ function Vlad(game, isPlayer) {
     this.leftwalk = false;
     this.isRight = isPlayer;
     this.game = game;
-
     //this.controlled = false;
     //Entity.call(this, game, 0, 400);
     //this.weakpunchR_hitbox = { x: this.x + 180, y: this.y -120, width: 125, height: 45 }
     this.myboxes = new Hitbox(game, 1);
     this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+    this.bar;
 }
 
 //Vlad.prototype = new Entity();
 //Vlad.prototype.constructor = Vlad;
+
+Vlad.prototype.loadEnergyBar = function (energy_bar) { this.bar = energy_bar }
 
 Vlad.prototype.updateOrientation = function () {
     this.standing = this.isPlayer;
@@ -69,6 +71,7 @@ Vlad.prototype.updateOrientation = function () {
     this.start = this.isPlayer ? 100 : 1000;
     this.ground = 410;
     this.controlled = this.isPlayer;
+    this.bar = new Bar(this.game, this);
     Entity.call(this, this.game, this.start, this.ground);
 }
 
