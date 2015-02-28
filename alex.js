@@ -48,11 +48,16 @@ function Alex(game, isPlayer) {
 
     this.myboxes = new Hitbox(game, 2);
     this.myboxes.setHitbox(this.x + 85, this.y - 140, 110, 300);
+ 
     this.game = game;
+    this.bar;
 }
 
-//Alex.prototype = new Entity();
-//Alex.prototype.constructor = Alex;
+Alex.prototype = new Entity();
+Alex.prototype.constructor = Alex;
+
+
+Alex.prototype.loadEnergyBar = function (energy_bar) { this.bar = energy_bar }
 
 Alex.prototype.updateOrientation = function () {
     this.standing = this.isPlayer;
