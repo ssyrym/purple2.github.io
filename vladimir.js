@@ -283,7 +283,7 @@ Vlad.prototype.update = function () {
 			}
         } else {
             if (this.vlad_strong_punch_leftAnimation.currentFrame() === 3) {
-                this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                this.myboxes.setAttackBox(this.x - 22, this.y - 120, 125, 45);// right weak punch hitbox set****
                 this.myboxes.setAttack();
                 this.myboxes.attackenemy();
                 this.myboxes.unsetAttack();
@@ -299,7 +299,7 @@ Vlad.prototype.update = function () {
     if (this.weak_kick) {
         if (this.isRight) {
             if (this.vlad_weak_kick_rightAnimation.currentFrame() === 3) {
-                this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                this.myboxes.setAttackBox(this.x + 175, this.y , 125, 65);// right weak punch hitbox set****
                 this.myboxes.setAttack();
                 this.myboxes.attackenemy();
                 this.myboxes.unsetAttack();
@@ -312,7 +312,7 @@ Vlad.prototype.update = function () {
             }
         } else {
             if (this.vlad_weak_kick_leftAnimation.currentFrame() === 3) {
-                this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                this.myboxes.setAttackBox(this.x - 30 , this.y , 115, 65);// right weak kick hitbox set****
                 this.myboxes.setAttack();
                 this.myboxes.attackenemy();
                 this.myboxes.unsetAttack();
@@ -328,7 +328,7 @@ Vlad.prototype.update = function () {
     if (this.strong_kick) {
         if (this.isRight) {
             if (this.vlad_strong_kick_rightAnimation.currentFrame() === 3) {
-                this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                this.myboxes.setAttackBox(this.x + 180, this.y , 125, 55);// right strong kick hitbox set****
                 this.myboxes.setAttack();
                 this.myboxes.attackenemy();
                 this.myboxes.unsetAttack();
@@ -341,7 +341,7 @@ Vlad.prototype.update = function () {
 			}
         } else {
             if (this.vlad_strong_kick_leftAnimation.currentFrame() === 3) {
-                this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                this.myboxes.setAttackBox(this.x -40, this.y , 125, 55);// right weak punch hitbox set****
                 this.myboxes.setAttack();
                 this.myboxes.attackenemy();
                 this.myboxes.unsetAttack();
@@ -368,14 +368,15 @@ Vlad.prototype.update = function () {
 }
 
 Vlad.prototype.draw = function (ctx) {
-        ctx.fillStyle = "DarkGreen";
-        ctx.fillRect(this.myboxes.hitbox.x, this.myboxes.hitbox.y, this.myboxes.hitbox.width, this.myboxes.hitbox.height);
-        Entity.prototype.draw.call(this);
-        if (this.current_action) {
-            ctx.fillStyle = "Red";
-            ctx.fillRect(this.myboxes.attackbox.x, this.myboxes.attackbox.y, this.myboxes.attackbox.width, this.myboxes.attackbox.height);
-            Entity.prototype.draw.call(this);
-        }  
+    //commented this part out since is was used for setting hitboxes testing
+        //ctx.fillStyle = "DarkGreen";
+        //ctx.fillRect(this.myboxes.hitbox.x, this.myboxes.hitbox.y, this.myboxes.hitbox.width, this.myboxes.hitbox.height);
+        //Entity.prototype.draw.call(this);
+        //if (this.current_action) {
+        //    ctx.fillStyle = "Red";
+        //    ctx.fillRect(this.myboxes.attackbox.x, this.myboxes.attackbox.y, this.myboxes.attackbox.width, this.myboxes.attackbox.height);
+        //    Entity.prototype.draw.call(this);
+        //}  
     if (this.jumping) {
         if (this.isRight) {
 			this.vlad_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 340);
