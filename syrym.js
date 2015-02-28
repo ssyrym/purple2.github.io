@@ -50,10 +50,13 @@ function Syrym(game, isPlayer) {
     this.game = game;
     this.myboxes = new Hitbox(game, 4);
     this.myboxes.setHitbox(this.x + 160, this.y - 77, 95, 290);
+    this.bar;
 }
 
 Syrym.prototype = new Entity();
 Syrym.prototype.constructor = Syrym;
+
+Syrym.prototype.loadEnergyBar = function (energy_bar) { this.bar = energy_bar }
 
 Syrym.prototype.updateOrientation = function () {
     this.standing = this.isPlayer;
@@ -63,6 +66,7 @@ Syrym.prototype.updateOrientation = function () {
     this.start = this.isPlayer ? 100 : 1000;
     this.ground = 355;
     this.controlled = this.isPlayer;
+    this.bar = new Bar(this.game, this);
     Entity.call(this, this.game, this.start, this.ground);
 }
 
