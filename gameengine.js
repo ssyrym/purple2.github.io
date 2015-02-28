@@ -62,6 +62,8 @@ function GameEngine() {
     //Fighters
     this.Fighters = [new John(this, null), new Alex(this, null), new Vlad(this, null), new Syrym(this, null)];
     this.selection = null;
+    this.Bar = new Bar();
+
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -237,6 +239,9 @@ GameEngine.prototype.draw = function () {
     this.ctx.save();
     for (var i = 0; i < this.entities.length; i++) {
         this.entities[i].draw(this.ctx);
+    }
+    if (this.inFight) {
+        this.Bar.drawBar(this.ctx);
     }
     this.ctx.restore();
 }
