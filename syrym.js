@@ -1,12 +1,12 @@
 function Syrym(game, isPlayer) {
     //Syrym Sprite
-    this.syrym_standingAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"),  0, 400, 410, 400, 0.3, 10, true, false, 1);
+    this.syrym_standingAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"),  0, 400, 410, 400, 0.15, 10, true, false, 1);
     this.syrym_rightwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2870, 800, 410, 400, 0.15, 6, true, false, 2);
-    this.syrym_jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 2000, 410, 400, 0.1, 4, false, false, 3);
+    this.syrym_jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 2000, 410, 400, 0.2, 4, false, false, 3);
 
     this.syrym_standingLeftAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 1640, 400, 410, 400, 0.3, 10, true, true, 0);
     this.syrym_leftwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 410, 800, 410, 400, 0.15, 6, true, true, 0);
-    this.syrym_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 4100, 2000, 410, 400, 0.1, 4, false, true, 0);
+    this.syrym_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 4100, 2000, 410, 400, 0.2, 4, false, true, 0);
 
     this.syrym_blockRightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2460, 1600, 410, 400, 0.07, 1, true, false, 7);
     this.syrym_blockLeftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2870, 1600, 410, 400, 0.07, 1, true, true, 0);
@@ -14,8 +14,8 @@ function Syrym(game, isPlayer) {
 
     /////new controls animation
     //weak punch
-    this.syrym_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 3690, 1200, 410, 400, 0.14, 5, false, false, 9);
-    this.syrym_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 0, 1200, 410, 400, 0.14, 5, false, true, 0);
+    this.syrym_weak_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 3690, 1200, 410, 400, 0.16, 5, false, false, 9);
+    this.syrym_weak_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 0, 1200, 410, 400, 0.16, 5, false, true, 0);
 
     //weak kick
     this.syrym_weak_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2870, 1600, 410, 400, 0.1, 6, false, false, 11);
@@ -49,7 +49,7 @@ function Syrym(game, isPlayer) {
     this.isPlayer = isPlayer;
     this.game = game;
     this.myboxes = new Hitbox(game, 4);
-    this.myboxes.setHitbox(this.x + 75, this.y - 140, 125, 300);
+    this.myboxes.setHitbox(this.x + 160, this.y - 77, 95, 290);
 }
 
 Syrym.prototype = new Entity();
@@ -61,16 +61,16 @@ Syrym.prototype.updateOrientation = function () {
     this.isRight = this.isPlayer;
 
     this.start = this.isPlayer ? 100 : 1000;
-    this.ground = 410;
+    this.ground = 355;
     this.controlled = this.isPlayer;
     Entity.call(this, this.game, this.start, this.ground);
 }
 
 Syrym.prototype.update = function () {
     if (this.isRight) {
-        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+        this.myboxes.setHitbox(this.x + 160, this.y - 77, 95, 290);//this.x + 70, this.y - 140, 125, 300);
     } if (!this.isRight) {
-        this.myboxes.setHitbox(this.x + 70, this.y - 140, 125, 300);
+        this.myboxes.setHitbox(this.x + 160, this.y - 77, 95, 290);//this.x + 70, this.y - 140, 125, 300);
     }
     if (this.game.thePPressed) {
         this.controlled = !this.controlled;
@@ -209,9 +209,9 @@ Syrym.prototype.update = function () {
 
 
             var totalHeight = 200;
-            var howHigh = -4;
+            var howHigh = -6;
             if (this.game.upArrowPressed) {
-                howHigh = -6;
+                howHigh = -7;
             }
             if (jumpDistance > 0.5)
                 jumpDistance = 1 - jumpDistance;
@@ -219,10 +219,10 @@ Syrym.prototype.update = function () {
             var height = totalHeight * (howHigh * (jumpDistance * jumpDistance - jumpDistance));
             this.y = this.ground - height;
             if (this.game.rightArrow) {
-                this.x += 10;
+                this.x += 20;
                 
             } else if (this.game.leftArrow) {
-                this.x -= 10;
+                this.x -= 20;
                 
             }
             this.leftwalk = false;
@@ -242,7 +242,7 @@ Syrym.prototype.update = function () {
         if (this.weak_punch) {
             if (this.isRight) {
                 if (this.syrym_weak_punch_rightAnimation.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 230, this.y - 50, 125, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -274,7 +274,7 @@ Syrym.prototype.update = function () {
         if (this.strong_punch) {
             if (this.isRight) {
                 if (this.syrym_strong_punch_rightAnimation.currentFrame() === 3) {//adjust hitbox stuff here
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 240, this.y - 50, 125, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -305,7 +305,7 @@ Syrym.prototype.update = function () {
         if (this.weak_kick) {
             if (this.isRight) {
                 if (this.syrym_weak_kick_rightAnimation.currentFrame() === 3) {//set it to the right frame you want<==========
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 240, this.y +70, 125, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -337,7 +337,7 @@ Syrym.prototype.update = function () {
         if (this.strong_kick) {
             if (this.isRight) {
                 if (this.syrym_strong_kick_rightAnimation.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 200, this.y - 70, 125, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
