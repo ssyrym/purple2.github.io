@@ -14,7 +14,7 @@ function Bar() {
     this.x2 = 1050;
 
     this.y = 100;
-
+    this.hitDamage = 21;
     this.totalHits = 0;
 }
 
@@ -30,8 +30,8 @@ Bar.prototype.drawBar = function (ctx) {
 
 Bar.prototype.decreaseHealth = function (isLeftFihter) {
     if(isLeft){
-        this.greenLEFTwidth = this.greenLEFTwidth - 21;
+        this.greenLEFTwidth = this.greenLEFTwidth - this.hitDamage;
     } else {
-        this.greenRIGHTwidth = this.greenRIGHTwidth - 21;
+        this.greenRIGHTwidth = this.greenRIGHTwidth - this.hitDamage;
     }
 }
