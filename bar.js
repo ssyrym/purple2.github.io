@@ -8,7 +8,7 @@ function Bar() {
 
     this.greenheight = 16;
     this.greenLEFTwidth = 210;
-    this.greenRIGHTwidth = 210 - 50;
+    this.greenRIGHTwidth = 210;
 
     this.x1 = 50;
     this.x2 = 1050;
@@ -29,9 +29,10 @@ Bar.prototype.drawBar = function (ctx) {
 
 
 Bar.prototype.decreaseHealth = function (isLeftFihter) {
-    if(isLeft){
+    if (isLeftFihter) {
         this.greenLEFTwidth = this.greenLEFTwidth - this.hitDamage;
     } else {
+        this.x2 = this.x2 + this.hitDamage;
         this.greenRIGHTwidth = this.greenRIGHTwidth - this.hitDamage;
     }
 }
