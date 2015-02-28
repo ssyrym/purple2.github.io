@@ -62,7 +62,7 @@ function GameEngine() {
     //Fighters
     this.Fighters = [new John(this, null), new Alex(this, null), new Vlad(this, null), new Syrym(this, null)];
     this.selection = null;
-    this.Bar = new Bar();
+   // this.Bar = new Bar();
 
 }
 
@@ -82,6 +82,7 @@ GameEngine.prototype.start = function () {
         if (that.inMenu) {
             that.getSelections();
         } else if (that.inFight) {
+
             //console.log("In gameLoop inFight");
             that.loop();
             requestAnimFrame(gameLoop, that.ctx.canvas);
@@ -93,7 +94,7 @@ GameEngine.prototype.setFighters = function (selection) {
     this.Fighter = this.Fighters[selection];
     this.Fighter.isPlayer = true;
     this.Fighter.updateOrientation();
-
+    this.Fighter.loadEnergyBar(new Bar(this, this.Fighter));
     var opponentIndex = selection;
 
     while (selection === opponentIndex) {
@@ -103,12 +104,15 @@ GameEngine.prototype.setFighters = function (selection) {
     this.Opponent = this.Fighters[opponentIndex];
     this.Opponent.isPlayer = false;
     this.Opponent.updateOrientation();
-
+    this.Opponent.loadEnergyBar(new Bar(this, this.Opponent));
     this.entities[0].removeFromWorld = true;
-
+    
     this.addEntity(new Background(this, ASSET_MANAGER.getAsset("./img/staircase.png")));
     this.addEntity(this.Fighter);
     this.addEntity(this.Opponent);
+    this.addEntity(this.Fighter.bar);
+    this.addEntity(this.Opponent.bar);
+
     console.log('Finished Selecting');
 
     this.inMenu = false;
@@ -240,9 +244,9 @@ GameEngine.prototype.draw = function () {
     for (var i = 0; i < this.entities.length; i++) {
         this.entities[i].draw(this.ctx);
     }
-    if (this.inFight) {
-        this.Bar.drawBar(this.ctx);
-    }
+  /*  if (this.inFight) {
+        this.Bar.draw(this.ctx);
+    }*/
     this.ctx.restore();
 }
 
