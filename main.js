@@ -22,6 +22,10 @@ ASSET_MANAGER.queueDownload("./img/syrym1reversed.png");
 ASSET_MANAGER.queueDownload("./img/char_select.png");
 ASSET_MANAGER.queueDownload("./img/staircase.png");
 
+ASSET_MANAGER.queueDownload("./img/lifebarRIGHT.png");
+ASSET_MANAGER.queueDownload("./img/lifebarLEFT.png");
+ASSET_MANAGER.queueDownload("./img/green.png");
+
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
     var canvas = document.getElementById('gameWorld');
