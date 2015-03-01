@@ -222,10 +222,10 @@ Syrym.prototype.update = function () {
 
             var height = totalHeight * (howHigh * (jumpDistance * jumpDistance - jumpDistance));
             this.y = this.ground - height;
-            if (this.game.rightArrow) {
+            if (this.game.rightArrow && this.x <= 1050) {
                 this.x += 20;
                 
-            } else if (this.game.leftArrow) {
+            } else if (this.game.leftArrow && this.x >= -150) {
                 this.x -= 20;
                 
             }
@@ -370,10 +370,10 @@ Syrym.prototype.update = function () {
             }
         }
 
-        if (this.rightwalk && this.x <= 1350) {// adjust bounds for your character walking off screen to right
+        if (this.rightwalk && this.x <= 1050) {// adjust bounds for your character walking off screen to right
             this.x += 8;
 
-        } else if (this.leftwalk && this.x >= -100) {// adjust bound for your char for walking to left
+        } else if (this.leftwalk && this.x >= -150) {// adjust bound for your char for walking to left
             this.x -= 8;
 
         }
