@@ -4,7 +4,7 @@ function Syrym(game, isPlayer) {
     this.syrym_rightwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2870, 800, 410, 400, 0.15, 6, true, false, 2);
     this.syrym_jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 2000, 410, 400, 0.2, 4, false, false, 3);
 
-    this.syrym_standingLeftAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 1640, 400, 410, 400, 0.3, 10, true, true, 0);
+    this.syrym_standingLeftAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 1640, 400, 410, 400, 0.15, 10, true, true, 0);
     this.syrym_leftwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 410, 800, 410, 400, 0.15, 6, true, true, 0);
     this.syrym_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 4100, 2000, 410, 400, 0.2, 4, false, true, 0);
 
@@ -260,7 +260,7 @@ Syrym.prototype.update = function () {
                 }
             } else {
                 if (this.syrym_weak_punch_leftAnimation.currentFrame() === 3) {//new code from here 3 is the frame it checks
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// Left weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 50, this.y - 50, 125, 45);// Left weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -292,7 +292,7 @@ Syrym.prototype.update = function () {
                 }
             } else {
                 if (this.syrym_strong_punch_leftAnimation.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 50, this.y - 50, 125, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -323,7 +323,7 @@ Syrym.prototype.update = function () {
                 }
             } else {
                 if (this.syrym_weak_kick_leftAnimation.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 50, this.y + 70, 125, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -355,7 +355,7 @@ Syrym.prototype.update = function () {
                 }
             } else {
                 if (this.syrym_strong_kick_leftAnimation.currentFrame() === 3) {
-                    this.myboxes.setAttackBox(this.x + 180, this.y - 120, 125, 45);// right weak punch hitbox set****
+                    this.myboxes.setAttackBox(this.x + 85, this.y - 70, 125, 45);// right weak punch hitbox set****
                     this.myboxes.setAttack();
                     this.myboxes.attackenemy();
                     this.myboxes.unsetAttack();
@@ -371,10 +371,10 @@ Syrym.prototype.update = function () {
         }
 
         if (this.rightwalk && this.x <= 1350) {// adjust bounds for your character walking off screen to right
-            this.x += 3;
+            this.x += 8;
 
         } else if (this.leftwalk && this.x >= -100) {// adjust bound for your char for walking to left
-            this.x -= 3;
+            this.x -= 8;
 
         }
     }//
