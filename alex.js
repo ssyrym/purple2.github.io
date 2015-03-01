@@ -32,6 +32,9 @@ function Alex(game, isPlayer) {
     //victory
     this.alex_victory_Animation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 3875, 251.5, 325, .2, 4, false, false, 0);
    
+    //loss
+    this.alex_loss_Animation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 3875-325, 251.5, 325, .2, 4, false, false, 0);
+    
     //new boolean values added here
     this.weak_punch = false;
     this.weak_kick = false;
