@@ -1,11 +1,11 @@
 function Alex(game, isPlayer) {
     //Alex Sprite
     this.alex_standingAnim = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 2250+10, 251.5, 325, .2, 4, true, false, 0);
-    this.alex_rightwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 1280 + 10, 251.5, 325, 0.2, 8, true, false, 0);
+    this.alex_rightwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 1280 + 10, 251.5, 325, 0.2, 7, true, false, 0);
     this.alex_jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 1615, 251.5, 325, 0.15, 5, false, false, 0);
 
     this.alex_standingLeftAnim = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008-1002, 2250+10, 251.5, 325, .2, 4, true, true, 0);
-    this.alex_leftwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 0, 1280 + 10, 251.5, 325, 0.2, 8, true, true, 0);
+    this.alex_leftwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 0, 1280 + 10, 251.5, 325, 0.2, 7, true, true, 0);
     this.alex_leftjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 750.5, 1615, 251.5, 325, 0.15, 5, false, true, 0);
 
     this.alex_blockRightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 4200+10, 251.5, 325, 1, 1, true, false, 0);
