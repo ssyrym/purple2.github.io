@@ -217,10 +217,10 @@ Vlad.prototype.update = function () {
 
         var height = totalHeight * (howHigh * (jumpDistance * jumpDistance - jumpDistance));
         this.y = this.ground - height;
-        if (this.game.rightArrow && this.x < 1350) {
+        if (this.game.rightArrow && this.x < 1100) {
             this.x += 10;
             
-        } else if (this.game.leftArrow && this.x > 200) {
+        } else if (this.game.leftArrow && this.x > -50) {
             this.x -= 10;
         
         }
@@ -357,10 +357,10 @@ Vlad.prototype.update = function () {
 
     }
 
-    if (this.rightwalk && this.x <=1350) {
+    if (this.rightwalk && this.x <=1100) {
         this.x += 3;
 
-    } else if (this.leftwalk && this.x>=-100) {
+    } else if (this.leftwalk && this.x>=-50) {
         this.x -= 3;
 
     }
