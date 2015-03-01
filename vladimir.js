@@ -30,6 +30,13 @@ function Vlad(game, isPlayer) {
 
     this.vlad_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite_reverse.png"), 0, (2304 / 5) *5, (1536 / 5)+2, 2304 / 5, .1, 7, false, true, 32);
 
+
+    this.vlad_victory_animation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 14, (307.2) + 2, 2304 / 5, .1, 10, false, false, 0);
+
+    this.vlad_loss_animation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 13, (1536 / 5) + 2, 2304 / 5, .1, 7, false, true, 0);
+
+    this.vlad_hit_animation = new Animation(ASSET_MANAGER.getAsset("./img/Vlad_Sprite.png"), 0, (2304 / 5) * 11, (1536 / 5) + 2, 2304 / 5, .1, 7, false, true, 0);
+
     //new boolean values added here
     this.weak_punch = false;
     this.weak_kick = false;
