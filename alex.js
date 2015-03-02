@@ -431,9 +431,7 @@ Alex.prototype.update = function () {
             
         }
         
-    }//
-    //Entity.prototype.update.call(this);
-}
+    }//Entity.prototype.update.call(this);
 
 Alex.prototype.draw = function (ctx) {
     //ctx.fillStyle = "DarkGreen";
