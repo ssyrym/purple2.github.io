@@ -448,6 +448,12 @@ Alex.prototype.draw = function (ctx) {
         } else {
             this.alex_leftjumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
         }
+     else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
+        if(this.isRight) {
+            this.alex_high_hit_rightAnimation.drawFrame(this.game, ctx, this.x - 30, this.y - 300);
+        } else {
+            this.alex_high_hit_leftAnimation.drawFrame(this.game, ctx, this.x - 30, this.y - 300);
+        }
     } else if (this.rightwalk) {
         this.alex_rightwalkAnim.drawFrame(this.game, ctx, this.x, this.y - 150);
     } else if (this.leftwalk) {
