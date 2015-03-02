@@ -124,24 +124,53 @@ GameEngine.prototype.updateFight = function () {
 
     this.clearEntities();
 };
+
+GameEngine.prototype.getCharacter = function ( id, isPlayer) {
+    var fighter = null;
+
+    switch (id) {
+        case 0:
+            fighter = new John(this, isPlayer);
+            break;
+        case 1:
+            fighter = new Alex(this, isPlayer);
+            break;            
+        case 2:
+            fighter = new Vlad(this, isPlayer);
+            break;
+        case 3:
+            fighter = new Syrym(this, isPlayer);
+            break;
+    }
+
+    //console.log(id + " selected " + fighter.toString());
+    
+    return fighter;
+}
+
 //-------------------------------
 GameEngine.prototype.setFighters = function (selection) {
-    this.Fighter = this.Fighters[selection];
-    this.Fighter.isPlayer = true;
+    this.Fighter = this.getCharacter( selection, true);
+    //this.Fighter = this.Fighters[selection];
+    //this.Fighter.isPlayer = true;
     this.Fighter.updateOrientation();
     this.Fighter.loadEnergyBar(new Bar(this, this.Fighter));
+
+    //Select opponent
     var opponentIndex = selection;
 
     while (selection === opponentIndex) {
-        opponentIndex = Math.floor(Math.random() * this.Fighters.length);
+        opponentIndex = Math.floor(Math.random() * 4/*Num Fighters*/);
     }
 
-    this.Opponent = this.Fighters[opponentIndex];
-    this.Opponent.isPlayer = false;
+    this.Opponent = this.getCharacter(opponentIndex, false);
+    //this.Opponent.isPlayer = false;
     this.Opponent.updateOrientation();
     this.Opponent.loadEnergyBar(new Bar(this, this.Opponent));
-    this.entities[0].removeFromWorld = true;
+
+    this.clearEntities();
     
+    //Add Components of fight.
     this.addEntity(new Background(this, ASSET_MANAGER.getAsset("./img/staircase.png")));
     this.addEntity(this.Fighter);
     this.addEntity(this.Opponent);
@@ -156,6 +185,7 @@ GameEngine.prototype.setFighters = function (selection) {
 
     this.start();
 };
+
 
 GameEngine.prototype.getSelections = function () {
     console.log('In menu');
