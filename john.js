@@ -41,8 +41,8 @@ function John(game, isPlayer) {
     this.hdLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 2220, 3010, 100, 280, .05, 3, false, true, 0);
 
     //body damage
-    this.bdyRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 3290, 360, 280, .05, 3, false, false, 0);
-    this.bdyLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1440, 3290, 360, 280, .05, 3, false, true, 0);
+    this.bdyRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 3290, 360/3, 280, .15, 3, false, false, 0);
+    this.bdyLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 2155, 3290, 360/3, 280, .15, 3, false, true, 0);
 
     //Defeat
     this.defeatRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 3570, 120, 280, .07, 6, false, false, 0);
@@ -208,13 +208,71 @@ John.prototype.update = function () {
             this.weak_kick = false;
             ////////////////////////////////////////////Added weak action booleans^^
         }
-
-
+    }
+    if (!this.controlled && !this.current_action) {
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.standingLeft = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.strong_kick = false;
+        this.strong_punch = false;
+        this.weak_kick = false;
+        this.weak_punch = true;
+        this.current_action = true;
+    }
+    if (this.gotHit) {//<-----------------------------------------new from here
+        this.current_action = true;
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.weak_punch = false;
+        this.weak_kick = false;
+        this.strong_punch = false;
+        this.strong_kick = false;
         if (this.jumping) {
-            var jumpDistance;
+            this.vlad_jumpAnimation.elapsedTime = 0;
+            this.jumping = false;
+            this.y = this.ground;
+        }
+        if (this.isRight) {
+            console.log("Hit right");
+            if (this.x >= -50) {
+                this.x += -1;
+            }
 
-            if (this.isRight) {
-                if (this.jumpRight.isDone()) {
+            if (this.bdyRight.isDone()) {
+                console.log("end of right hit animation");
+                this.bdyRight.elapsedTime = 0;
+                //this.standingLeft = true;
+                this.standing = true;
+                this.current_action = false;
+                this.gotHit = false;
+            }//add your animations accordingly both left and right hit animations
+        } else {
+            console.log("hit left");
+            if (this.x < 1100) {
+                this.x += 1;
+            }
+
+            if (this.bdyLeft.isDone()) {
+                console.log("end of hit animation Left");
+                this.bdyLeft.elapsedTime = 0;
+                this.standingLeft = true;
+                this.current_action = false;
+                this.gotHit = false;
+
+            }
+        }//<-------------------------to here 
+    }
+    if (this.jumping) {
+        var jumpDistance;
+
+        if (this.isRight) {
+            if (this.jumpRight.isDone()) {
                     this.jumpRight.elapsedTime = 0;
                     this.jumping = false;
                     this.standing = true;
@@ -386,15 +444,14 @@ John.prototype.update = function () {
             }
         }
 
-        if (this.rightwalk) {
+        if (this.controlled && this.rightwalk) {
             this.x += 3;
             
-        } else if (this.leftwalk) {
+        } else if (this.controlled && this.leftwalk) {
             this.x -= 3;
             
         }
         
-    }//
     //Entity.prototype.update.call(this);
 }
 
@@ -414,6 +471,13 @@ John.prototype.draw = function (ctx) {
         } else {
             this.jumpLeft.drawFrame(this.game, ctx, this.x, this.y - 190);
         }
+    } else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
+        if (this.isRight) {
+            this.bdyRight.drawFrame(this.game, ctx, this.x, this.y - 150);
+        } else {
+            this.bdyLeft.drawFrame(this.game, ctx, this.x, this.y - 150);
+        }
+
     } else if (this.rightwalk) {
         this.walkRight.drawFrame(this.game, ctx, this.x, this.y - 150);
     } else if (this.leftwalk) {
