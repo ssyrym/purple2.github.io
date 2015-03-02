@@ -190,7 +190,20 @@ Syrym.prototype.update = function () {
             this.weak_kick = false;
             ////////////////////////////////////////////Added weak action booleans^^
         }
-
+    }
+    if (!this.controlled && !this.current_action) {
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.standingLeft = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.strong_kick = false;
+        this.strong_punch = false;
+        this.weak_kick = false;
+        this.weak_punch = true;
+        this.current_action = true;
+    }
 
         if (this.jumping) {
             var jumpDistance;
@@ -377,7 +390,7 @@ Syrym.prototype.update = function () {
             this.x -= 8;
 
         }
-    }//
+    //}//
     //Entity.prototype.update.call(this);
 }
 
