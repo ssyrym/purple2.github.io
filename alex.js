@@ -198,8 +198,7 @@ Alex.prototype.update = function () {
             ////////////////////////////////////////////Added weak action booleans^^
         }
     }
-        
-    if (this.gotHit) {//<-----------------------------------------new from here
+        if (this.gotHit) {//<-----------------------------------------new from here
         this.current_action = true;
         this.rightwalk = false;
         this.leftwalk = false;
@@ -223,18 +222,17 @@ Alex.prototype.update = function () {
             }//add your animations accordingly both left and right hit animations
         } else {
             console.log("hit left");
-            if (this.alex_high_hit_leftnimation.isDone()) {
+            if (this.alex_high_hit_leftAnimation.isDone()) {
                 console.log("end of hit animation Left");
-                this.alex_high_hit_leftnimation.elapsedTime = 0;
+                this.alex_high_hit_leftAnimation.elapsedTime = 0;
                 this.standingLeft = true;
                 this.current_action = false;
                 this.gotHit = false;
                 
             }
         }//<-------------------------to here 
-    }
 
-
+    }//end of added code
         if (this.jumping) {
             var jumpDistance;
 
