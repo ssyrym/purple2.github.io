@@ -53,7 +53,6 @@ function Alex(game, isPlayer) {
     this.leftwalk = false;
     this.current_action = false;
     this.gotHit = false;
-    this.gotHit = false;
     this.isPlayer = isPlayer;
     this.game = game;
     this.myboxes = new Hitbox(game, 2);
