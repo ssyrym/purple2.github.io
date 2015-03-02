@@ -197,8 +197,9 @@ Alex.prototype.update = function () {
             this.weak_kick = false;
             ////////////////////////////////////////////Added weak action booleans^^
         }
+    }
         
-            if (this.gotHit) {//<-----------------------------------------new from here
+    if (this.gotHit) {//<-----------------------------------------new from here
         this.current_action = true;
         this.rightwalk = false;
         this.leftwalk = false;
@@ -447,8 +448,7 @@ Alex.prototype.draw = function (ctx) {
             this.alex_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
         } else {
             this.alex_leftjumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
-        }
-     else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
+        } else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
         if(this.isRight) {
             this.alex_high_hit_rightAnimation.drawFrame(this.game, ctx, this.x - 30, this.y - 300);
         } else {
