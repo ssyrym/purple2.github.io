@@ -8,7 +8,8 @@ function Bar(game, the_fighter) {
 
     this.barwidth = 400;
     this.barheight = 150;
-
+    
+    this.health = 0;
     this.greenRedheight = 5;
     this.redwidth = 256;
     this.greenwidth = 256;
@@ -46,6 +47,10 @@ Bar.prototype.draw = function (ctx) {
 }
 
 Bar.prototype.decreaseHealth = function (damage) {
+    this.health -= damage;
+    if( this.health <= 0 ) {
+        this.fighter.game.updateFight();
+    }
     this.fighter.isPlayer ? this.greenwidth -= damage : this.greenX += damage, this.greenwidth -= damage;
 }
 
