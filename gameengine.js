@@ -86,10 +86,45 @@ GameEngine.prototype.start = function () {
             //console.log("In gameLoop inFight");
             that.loop();
             requestAnimFrame(gameLoop, that.ctx.canvas);
-        }
+        } else {//------------------------------
+            that.displayMessage();
+        }//-------------------------------------
     })();
 }
 
+// ---------------------------------
+GameEngine.prototype.displayMessage = function () {
+    this.inMessage = true;
+    var message = "";
+    if (this.Fighter.bar.health <= 0) {
+        message = "You are NOT the man!"
+    } else {
+        message = "You da man, yo!"
+    }
+
+    this.ctx.fillStyle = 'black';
+    this.ctx.font = 'italic bold 60px sans-serif';
+    this.ctx.textBaseline = 'bottom';
+    this.ctx.fillText(message, 380, 200);
+    this.ctx.fillText("Click to Select New Fighter", 300, 400);
+    //this.inMenu = true;
+    //this.start();
+}
+
+GameEngine.prototype.clearEntities = function () {
+    var clear_ind = 0;
+    while (clear_ind < this.entities.length) {
+        this.entities[clear_ind].removeFromWorld = true;
+        clear_ind++;
+    }
+};
+
+GameEngine.prototype.updateFight = function () {
+    this.inFight = false;
+
+    this.clearEntities();
+};
+//-------------------------------
 GameEngine.prototype.setFighters = function (selection) {
     this.Fighter = this.Fighters[selection];
     this.Fighter.isPlayer = true;
@@ -131,7 +166,11 @@ GameEngine.prototype.getSelections = function () {
         if (that.inMenu) {
             console.log(Math.floor(e.clientX / 250));
             that.setFighters(Math.floor(e.clientX / 250));
-        }
+        } else if (that.inMessage){//-----
+            that.inMessage = false;
+            that.inMenu = true;
+            that.start();
+        }//-------------------------------
     })
 
     this.addEntity(new Background(this, ASSET_MANAGER.getAsset("./img/char_select.png")));
