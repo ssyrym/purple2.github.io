@@ -232,6 +232,7 @@ Alex.prototype.update = function () {
                 
             }
         }//<-------------------------to here 
+    }
 
 
         if (this.jumping) {
