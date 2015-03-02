@@ -48,8 +48,9 @@ Bar.prototype.draw = function (ctx) {
 
 Bar.prototype.decreaseHealth = function (damage) {
     this.health -= damage;
-    if( this.health <= 0 ) {
+    if (this.health <= 0) {
         this.fighter.game.updateFight();
+        console.log("updated fight");
     }
     this.fighter.isPlayer ? this.greenwidth -= damage : this.greenX += damage, this.greenwidth -= damage;
 }
