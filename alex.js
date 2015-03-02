@@ -197,6 +197,40 @@ Alex.prototype.update = function () {
             this.weak_kick = false;
             ////////////////////////////////////////////Added weak action booleans^^
         }
+        
+            if (this.gotHit) {//<-----------------------------------------new from here
+        this.current_action = true;
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.weak_punch = false;
+        this.weak_kick = false;
+        this.strong_punch = false;
+        this.strong_kick = false;
+        this.jumping = false;
+        if (this.isRight) {
+            console.log("Hit right");
+            if (this.alex_high_hit_rightAnimation.isDone()) {
+                console.log("end of right hit animation");
+                this.alex_high_hit_rightAnimation.elapsedTime = 0;
+                //this.standingLeft = true;
+                this.standing = true;
+                this.current_action = false;
+                this.gotHit = false;
+            }//add your animations accordingly both left and right hit animations
+        } else {
+            console.log("hit left");
+            if (this.alex_high_hit_leftnimation.isDone()) {
+                console.log("end of hit animation Left");
+                this.alex_high_hit_leftnimation.elapsedTime = 0;
+                this.standingLeft = true;
+                this.current_action = false;
+                this.gotHit = false;
+                
+            }
+        }//<-------------------------to here 
 
 
         if (this.jumping) {
