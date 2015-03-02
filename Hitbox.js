@@ -44,8 +44,8 @@ Hitbox.prototype.attackenemy = function () {
     var ent2 = this.game.entities[2];
     var damage = 1;
     if (ent.myboxes.ID != this.ID) {
-        console.log(this.attack);
-        console.log("ent2 ID = this.ID check first ent");
+        //console.log(this.attack);
+        //console.log("ent2 ID = this.ID check first ent");
         
         if ((this.attack && !ent.gotHit &&
             (this.attackbox.x < ent.myboxes.hitbox.x + ent.myboxes.hitbox.width)) &&
@@ -62,12 +62,13 @@ Hitbox.prototype.attackenemy = function () {
                 damage *= 8;
             }
             
-            ent.bar.decreaseHealth( damage );
+            ent.bar.decreaseHealth(damage);
+            ent.gotHit = true;
             console.log("Player hit lost " + damage + "health");
         }
     } else if (ent2.myboxes.ID != this.ID) {
-        console.log(this.attackbox.x < ent2.myboxes.hitbox.x + ent2.myboxes.hitbox.width);
-        console.log("ent.ID = this.ID check for second");
+        //console.log(this.attackbox.x < ent2.myboxes.hitbox.x + ent2.myboxes.hitbox.width);
+        //console.log("ent.ID = this.ID check for second");
 
         if ((this.attack && !ent2.gotHit &&
             (this.attackbox.x < ent2.myboxes.hitbox.x + ent2.myboxes.hitbox.width)) &&
@@ -86,6 +87,7 @@ Hitbox.prototype.attackenemy = function () {
 
             console.log("Player hit lost " + damage + "health");
             ent2.bar.decreaseHealth(damage);
+            ent2.gotHit = true;
             
         }
     }
