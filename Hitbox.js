@@ -56,7 +56,7 @@ Hitbox.prototype.attackenemy = function () {
             if (ent.blockLeft || ent.blockRight) {
                 damage = .5;
             }
-            if (ent2.wkPunch || ent2.wkKick) {
+            if (ent2.weak_punch || ent2.weak_kick) {
                 damage *= 4;
             } else {
                 damage *= 8;
@@ -76,10 +76,10 @@ Hitbox.prototype.attackenemy = function () {
             (this.attackbox.y < ent2.myboxes.hitbox.y + ent2.myboxes.hitbox.height) &&
             (this.attackbox.height + this.attackbox.y > ent2.myboxes.hitbox.y)) {
 
-            if (ent.blockLeft || ent.blockRight) {
+            if (ent2.blockLeft || ent2.blockRight) {
                 damage = .5;
             }
-            if (ent2.wkPunch || ent2.wkKick) {
+            if (ent.weak_punch || ent.weak_kick) {
                 damage *= 4;
             } else {
                 damage *= 8;
