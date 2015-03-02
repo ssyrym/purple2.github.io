@@ -200,6 +200,7 @@ Alex.prototype.update = function () {
     }
     if (!this.controlled && !this.current_action) {
         this.rightwalk = false;
+        this.rightwalk = false;
         this.leftwalk = false;
         this.standing = false;
         this.standingLeft = false;
@@ -496,7 +497,7 @@ Alex.prototype.draw = function (ctx) {
         if (this.isRight) {
             this.alex_weak_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
         } else if (!this.isRight) {
-            this.alex_weak_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.alex_weak_punch_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
             //console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
         ////////////////////////////////////////////Added if statement^^
