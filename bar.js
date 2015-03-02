@@ -9,7 +9,7 @@ function Bar(game, the_fighter) {
     this.barwidth = 400;
     this.barheight = 150;
     
-    this.health = 0;
+    this.health = 256;
     this.greenRedheight = 5;
     this.redwidth = 256;
     this.greenwidth = 256;
