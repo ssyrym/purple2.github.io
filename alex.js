@@ -198,41 +198,7 @@ Alex.prototype.update = function () {
             ////////////////////////////////////////////Added weak action booleans^^
         }
     }
-        if (this.gotHit) {//<-----------------------------------------new from here
-        this.current_action = true;
-        this.rightwalk = false;
-        this.leftwalk = false;
-        this.standing = false;
-        this.sittingRight = false;
-        this.sittingLeft = false;
-        this.weak_punch = false;
-        this.weak_kick = false;
-        this.strong_punch = false;
-        this.strong_kick = false;
-        this.jumping = false;
-        if (this.isRight) {
-            console.log("Hit right");
-            if (this.alex_high_hit_rightAnimation.isDone()) {
-                console.log("end of right hit animation");
-                this.alex_high_hit_rightAnimation.elapsedTime = 0;
-                //this.standingLeft = true;
-                this.standing = true;
-                this.current_action = false;
-                this.gotHit = false;
-            }//add your animations accordingly both left and right hit animations
-        } else {
-            console.log("hit left");
-            if (this.alex_high_hit_leftAnimation.isDone()) {
-                console.log("end of hit animation Left");
-                this.alex_high_hit_leftAnimation.elapsedTime = 0;
-                this.standingLeft = true;
-                this.current_action = false;
-                this.gotHit = false;
-                
-            }
-        }//<-------------------------to here 
-
-    }//end of added code
+  
         if (this.jumping) {
             var jumpDistance;
 
@@ -447,12 +413,7 @@ Alex.prototype.draw = function (ctx) {
             this.alex_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
         } else {
             this.alex_leftjumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
-        } else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
-        if(this.isRight) {
-            this.alex_high_hit_rightAnimation.drawFrame(this.game, ctx, this.x - 30, this.y - 300);
-        } else {
-            this.alex_high_hit_leftAnimation.drawFrame(this.game, ctx, this.x - 30, this.y - 300);
-        }
+        } 
     } else if (this.rightwalk) {
         this.alex_rightwalkAnim.drawFrame(this.game, ctx, this.x, this.y - 150);
     } else if (this.leftwalk) {
