@@ -234,7 +234,8 @@ John.prototype.update = function () {
         this.strong_punch = false;
         this.strong_kick = false;
         if (this.jumping) {
-            this.vlad_jumpAnimation.elapsedTime = 0;
+            this.jumpRight.elapsedTime = 0;
+            this.jumpLeft.elapsedTime = 0;
             this.jumping = false;
             this.y = this.ground;
         }
