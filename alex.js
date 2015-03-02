@@ -27,7 +27,7 @@ function Alex(game, isPlayer) {
 
     //strong kick
     this.alex_strong_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 0, 251.5, 325, .1, 4, false, false, 0);
-    //this.alex_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 0, 251.5, 325, .1, 4, false, true, 0);
+    this.alex_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 0, 251.5, 325, .1, 4, false, true, 0);
 
     //victory
     this.alex_victory_Animation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 3875, 251.5, 325, .2, 4, false, false, 0);
@@ -36,10 +36,10 @@ function Alex(game, isPlayer) {
     this.alex_loss_Animation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 3875-325, 251.5, 325, .2, 4, false, false, 0);
     
     //hit right
-    this.alex_high_hit__rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 2585, 251.5, 325, .1, 4, false, false, 0);
+    this.alex_high_hit_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 2585, 251.5, 325, .1, 4, false, false, 0);
     
      //hit left
-    this.alex_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 2585, 251.5, 325, .1, 4, false, true, 0);
+    this.alex_high_hit_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 2585, 251.5, 325, .1, 4, false, true, 0);
     
     //new boolean values added here
     this.weak_punch = false;
