@@ -37,10 +37,10 @@ function Alex(game, isPlayer) {
     
     //hit right
     this.alex_high_hit_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 2585, 251.5, 325, .1, 4, false, false, 0);
-    
-     //hit left
+
+    //hit left
     this.alex_high_hit_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 2585, 251.5, 325, .1, 4, false, true, 0);
-    
+
     //new boolean values added here
     this.weak_punch = false;
     this.weak_kick = false;
@@ -60,8 +60,8 @@ function Alex(game, isPlayer) {
     this.bar;
 }
 
-Alex.prototype = new Entity();
-Alex.prototype.constructor = Alex;
+//Alex.prototype = new Entity();
+//Alex.prototype.constructor = Alex;
 
 
 Alex.prototype.loadEnergyBar = function (energy_bar) { this.bar = energy_bar }
@@ -198,7 +198,20 @@ Alex.prototype.update = function () {
             ////////////////////////////////////////////Added weak action booleans^^
         }
     }
- if (this.gotHit) {//<-----------------------------------------new from here
+    if (!this.controlled && !this.current_action) {
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.standingLeft = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.strong_kick = false;
+        this.strong_punch = false;
+        this.weak_kick = false;
+        this.weak_punch = true;
+        this.current_action = true;
+    }
+    if (this.gotHit) {//<-----------------------------------------new from here
         this.current_action = true;
         this.rightwalk = false;
         this.leftwalk = false;
@@ -209,9 +222,19 @@ Alex.prototype.update = function () {
         this.weak_kick = false;
         this.strong_punch = false;
         this.strong_kick = false;
-        this.jumping = false;
+        if (this.jumping) {
+            this.alex_jumpAnimation.elapsedTime = 0;
+            this.jumping = false;
+            this.y = this.ground;
+        }
+
+        
         if (this.isRight) {
             console.log("Hit right");
+            if (this.x >= -50) {
+                this.x += -1;
+            }
+
             if (this.alex_high_hit_rightAnimation.isDone()) {
                 console.log("end of right hit animation");
                 this.alex_high_hit_rightAnimation.elapsedTime = 0;
@@ -222,24 +245,29 @@ Alex.prototype.update = function () {
             }//add your animations accordingly both left and right hit animations
         } else {
             console.log("hit left");
+            if (this.x < 1100) {
+                this.x += 1;
+            }
+
             if (this.alex_high_hit_leftAnimation.isDone()) {
                 console.log("end of hit animation Left");
                 this.alex_high_hit_leftAnimation.elapsedTime = 0;
                 this.standingLeft = true;
                 this.current_action = false;
                 this.gotHit = false;
-               
+
             }
         }//<-------------------------to here 
 
     }//end of added code
 
-  
-        if (this.jumping) {
-            var jumpDistance;
 
-            if (this.isRight) {
-                if (this.alex_jumpAnimation.isDone()) {
+
+    if (this.jumping) {
+        var jumpDistance;
+
+        if (this.isRight) {
+            if (this.alex_jumpAnimation.isDone()) {
                     this.alex_jumpAnimation.elapsedTime = 0;
                     this.jumping = false;
                     this.standing = true;
@@ -423,15 +451,17 @@ Alex.prototype.update = function () {
             }
         }
 
-        if (this.rightwalk && this.x <= 1150) {
+        if (this.controlled && this.rightwalk && this.x <= 1150) {
             this.x += 3;
             
-        } else if (this.leftwalk && this.x>=-50) {
+        } else if (this.controlled && this.leftwalk && this.x >= -50) {
             this.x -= 3;
             
         }
         
-    }//Entity.prototype.update.call(this);
+    //}//
+    Entity.prototype.update.call(this);
+}
 
 Alex.prototype.draw = function (ctx) {
     //ctx.fillStyle = "DarkGreen";
@@ -447,11 +477,12 @@ Alex.prototype.draw = function (ctx) {
             this.alex_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
         } else {
             this.alex_leftjumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
-        }  else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
-        if(this.isRight) {
-            this.alex_high_hit_rightAnimation.drawFrame(this.game, ctx, this.x - 30, this.y - 300);
+        }
+    } else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
+        if (this.isRight) {
+            this.alex_high_hit_rightAnimation.drawFrame(this.game, ctx, this.x , this.y - 150);
         } else {
-            this.alex_high_hit_leftAnimation.drawFrame(this.game, ctx, this.x - 30, this.y - 300);
+            this.alex_high_hit_leftAnimation.drawFrame(this.game, ctx, this.x , this.y - 150);
         }
     } else if (this.rightwalk) {
         this.alex_rightwalkAnim.drawFrame(this.game, ctx, this.x, this.y - 150);
@@ -465,7 +496,7 @@ Alex.prototype.draw = function (ctx) {
         if (this.isRight) {
             this.alex_weak_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
         } else if (!this.isRight) {
-            this.alex_weak_punch_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.alex_weak_punch_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
             //console.log("this.x " + this.x + " this.y " + this.y, +" ");
         }
         ////////////////////////////////////////////Added if statement^^
