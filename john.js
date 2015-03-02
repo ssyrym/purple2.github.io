@@ -1,25 +1,30 @@
 function John(game, isPlayer) {
-    //John Sprite
+    //idle
     this.idleRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, -20, 100, 290, .3, 5, true, false, 0);
-    this.walkRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 260, 140, 280, 0.07, 12, true, false, 0);
-    this.jumpRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 870, 140, 280, 0.1, 5, false, false, 0);
-
     this.idleLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 2020, -20, 100, 290, .3, 5, true, false, 0);
-    this.walkLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 840, 260, 140, 280, 0.07, 12, true, false, 0);
-    this.jumpLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1820, 870, 140, 280, 0.1, 5, false, true, 0);
 
+    //walk
+    this.walkLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 840, 260, 140, 280, 0.07, 12, true, false, 0);
+    this.walkRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 260, 140, 280, 0.07, 12, true, false, 0);
+
+    //taunt
+    this.tauntLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 0, 540, 120, 330, .07, 9, false, false, 0);
+    this.tauntRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 1440, 540, 120, 330, .07, 9, false, true, 0);
+
+    //jump
+    this.jumpRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 870, 140, 280, 0.1, 5, false, false, 0);
+    this.jumpLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1820, 870, 140, 280, 0.1, 5, false, true, 0);
+    
+    //block
     this.blockRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 1610, 100, 280, 1, 1, true, false, 0);
     this.blockLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 2420, 1610, 100, 280, 1, 1, true, false, 0);
-
-    //this.tauntRight = new Animation(ASSET_MANAGER.getAsset())
-    //this.tauntLeft = new Animation
 
     /////new controls animation 
     //weak punch
     this.wkPunchRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 1890, 180, 280, .03, 11, false, false, 0);
     this.wkPunchLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 540, 1890, 180, 280, .03, 11, false, true, 0);
 
-    ////// weak kick
+    //weak kick
     this.wkKickRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 2450, 200, 280, .03, 12, false, false, 0);
     this.wkKickLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 120, 2450, 200, 280, .03, 12, false, true, 0);
 
@@ -31,6 +36,22 @@ function John(game, isPlayer) {
     this.strKickRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 2730, 274, 280, .07, 9, false, false, 0);
     this.strKickLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 54, 2730, 274, 280, .07, 9, false, true, 0);
 
+    //head damage
+    this.hdRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 3010, 100, 280, .05, 3, false, false, 0);
+    this.hdLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 2220, 3010, 100, 280, .05, 3, false, true, 0);
+
+    //body damage
+    this.bdyRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 3290, 360, 280, .05, 3, false, false, 0);
+    this.bdyLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1440, 3290, 360, 280, .05, 3, false, true, 0);
+
+    //Defeat
+    this.defeatRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 3570, 120, 280, .07, 6, false, false, 0);
+    this.defeatLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1800, 3570, 120, 280, .07, 6, false, true, 0);
+
+    //Victory
+    this.victoryRight = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Right.png"), 0, 3850, 180, 280, .07, 8, false, false, 0);
+    this.victoryLeft = new Animation(ASSET_MANAGER.getAsset("./img/John_Sprites_Left.png"), 1560, 3850, 180, 280, .07, 8, false, true, 0);
+	
     //new boolean values added here
     this.weak_punch = false;
     this.weak_kick = false;
