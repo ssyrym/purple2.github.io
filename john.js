@@ -218,8 +218,8 @@ John.prototype.update = function () {
         this.sittingLeft = false;
         this.strong_kick = false;
         this.strong_punch = false;
-        this.weak_kick = false;
-        this.weak_punch = true;
+        this.weak_kick = true;
+        this.weak_punch = false;
         this.current_action = true;
     }
     if (this.gotHit) {//<-----------------------------------------new from here
