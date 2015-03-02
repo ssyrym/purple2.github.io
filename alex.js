@@ -39,7 +39,7 @@ function Alex(game, isPlayer) {
     this.alex_high_hit__rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new.png"), 0, 2585, 251.5, 325, .1, 4, false, false, 0);
     
      //hit left
-    this.alex_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 0, 2585, 251.5, 325, .1, 4, false, true, 0);
+    this.alex_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/alex_sprite_new2.png"), 2008 - 1002, 2585, 251.5, 325, .1, 4, false, true, 0);
     
     //new boolean values added here
     this.weak_punch = false;
