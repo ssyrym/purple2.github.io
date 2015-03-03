@@ -20,7 +20,7 @@ function Bar(game, the_fighter) {
     this.y = 5;
 
     this.greenX = this.fighter.isPlayer ? this.x + 88 : this.x + 55;
-    this.greenRedY = this.y + 63
+    this.greenRedY = this.y + 73
     this.redX = this.fighter.isPlayer ? 70 + 88 : 900 + 55;
     //this.greenRIGHTwidth = 210;
 
