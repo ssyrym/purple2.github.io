@@ -2,7 +2,7 @@ function Syrym(game, isPlayer) {
     //Syrym Sprite
     this.syrym_standingAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"),  0, 400, 410, 400, 0.15, 10, true, false, 1);
     this.syrym_rightwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2870, 800, 410, 400, 0.15, 6, true, false, 2);
-    this.syrym_jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 2000, 410, 400, 0.2, 4, false, false, 3);
+    this.syrym_rightjumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 2000, 410, 400, 0.2, 4, false, false, 3);
 
     this.syrym_standingLeftAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 1640, 400, 410, 400, 0.15, 10, true, true, 0);
     this.syrym_leftwalkAnim = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 410, 800, 410, 400, 0.15, 6, true, true, 0);
@@ -235,8 +235,8 @@ Syrym.prototype.update = function () {
         this.strong_punch = false;
         this.strong_kick = false;
         if (this.jumping) {
-            this.jumpRight.elapsedTime = 0;
-            this.jumpLeft.elapsedTime = 0;
+            this.syrym_rightjumpAnimation.elapsedTime = 0;
+            this.syrym_leftjumpAnimation.elapsedTime = 0;
             this.jumping = false;
             this.y = this.ground;
         }
@@ -274,19 +274,19 @@ Syrym.prototype.update = function () {
             var jumpDistance;
 
             if (this.isRight) {
-                if (this.syrym_jumpAnimation.isDone()) {
-                    this.syrym_jumpAnimation.elapsedTime = 0;
+                if (this.syrym_rightjumpAnimation.isDone()) {
+                    this.syrym_rightjumpAnimation.elapsedTime = 0;
                     this.jumping = false;
                     this.standing = true;
                     this.current_action = false;
                 }
-                jumpDistance = this.syrym_jumpAnimation.elapsedTime / this.syrym_jumpAnimation.totalTime;
+                jumpDistance = this.syrym_rightjumpAnimation.elapsedTime / this.syrym_rightjumpAnimation.totalTime;
             } else {
                 if (this.syrym_leftjumpAnimation.isDone()) {
                     this.syrym_leftjumpAnimation.elapsedTime = 0;
                     this.jumping = false;
                 }
-                jumpDistance = this.syrym_leftjumpAnimation.elapsedTime / this.syrym_jumpAnimation.totalTime;
+                jumpDistance = this.syrym_leftjumpAnimation.elapsedTime / this.syrym_rightjumpAnimation.totalTime;
             }
 
 
@@ -472,7 +472,7 @@ Syrym.prototype.draw = function (ctx) {
 
     if (this.jumping) {
         if (this.isRight) {
-            this.syrym_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
+            this.syrym_rightjumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
         } else {
             this.syrym_leftjumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
         }
