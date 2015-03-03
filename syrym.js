@@ -39,15 +39,15 @@ function Syrym(game, isPlayer) {
 	
 	   //low punched
     this.syrym_low_punched_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2460, 2000, 410, 400, 0.1, 3, false, false, 0);
-    this.syrym_low_punched_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 3690, 2000, 410, 400, 0.1, 3, false, true, 0);
+    this.syrym_low_punched_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2050, 2000, 410, 400, 0.1, 3, false, true, 0);
 	
 	    //taunt
     this.syrym_taunt_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 810, 410, 400, 0.1, 7, false, false, 0);
     this.syrym_taunt_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2870, 810, 410, 400, 0.1, 7, false, true, 0);
 
 		//jump punch 
-    this.syrym_jump_punch_Animation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 1640, 2000, 410, 400, 0.1, 2, false, false, 0);
-    this.syrym_low_punched_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2460, 2000, 410, 400, 0.1, 2, false, true, 0);
+    this.syrym_jump_punch_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 1640, 2000, 410, 400, 0.1, 2, false, false, 0);
+    this.syrym_jump_punch_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2460, 2000, 410, 400, 0.1, 2, false, true, 0);
 	
 	   //victory
     this.syrym_victory_Animation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 1230, 410, 400, 0.1, 9, false, false, 0);
@@ -480,7 +480,7 @@ Syrym.prototype.draw = function (ctx) {
         if (this.isRight) {
             this.syrym_low_punched_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
         } else {
-            this.syrym_low_punched_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+            this.syrym_low_punched_leftAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
         }
     } else if (this.rightwalk) {
         this.syrym_rightwalkAnim.drawFrame(this.game, ctx, this.x, this.y - 150);
