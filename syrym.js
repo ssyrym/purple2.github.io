@@ -29,10 +29,29 @@ function Syrym(game, isPlayer) {
     this.syrym_strong_kick_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 1600, 410, 400, 0.1, 6, false, false, 15);
     this.syrym_strong_kick_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 5740 - 2460, 1600, 410, 400, 0.1, 6, false, true, 0);
 
-    //taunt
-    this.syrym_taunt_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 800, 410, 400, 0.1, 7, false, false, 15);
-    this.syrym_taunt_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2870, 800, 410, 400, 0.1, 7, false, true, 0);
+    //dead
+    this.syrym_dead_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 0, 410, 400, 0.1, 14, false, false, 0);
+    this.syrym_dead_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 0, 0, 410, 400, 0.1, 14, false, true, 0);
 
+	   //head punched
+    this.syrym_head_punched_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 4100, 800, 410, 400, 0.1, 4, false, false, 0);
+    this.syrym_head_punched_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 5740, 800, 410, 400, 0.1, 4, false, true, 0);
+	
+	   //low punched
+    this.syrym_low_punched_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 2460, 2000, 410, 400, 0.1, 3, false, false, 0);
+    this.syrym_low_punched_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 3690, 2000, 410, 400, 0.1, 3, false, true, 0);
+	
+	    //taunt
+    this.syrym_taunt_rightAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 810, 410, 400, 0.1, 7, false, false, 0);
+    this.syrym_taunt_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2870, 810, 410, 400, 0.1, 7, false, true, 0);
+
+		//jump punch 
+    this.syrym_jump_punch_Animation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 1640, 2000, 410, 400, 0.1, 2, false, false, 0);
+    this.syrym_low_punched_leftAnimation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1reversed.png"), 2460, 2000, 410, 400, 0.1, 2, false, true, 0);
+	
+	   //victory
+    this.syrym_victory_Animation = new Animation(ASSET_MANAGER.getAsset("./img/syrym1.png"), 0, 1230, 410, 400, 0.1, 9, false, false, 0);
+ 
     //new boolean values added here
     this.weak_punch = false;
     this.weak_kick = false;
@@ -204,7 +223,53 @@ Syrym.prototype.update = function () {
         this.weak_punch = true;
         this.current_action = true;
     }
+    if (this.gotHit) {//<-----------------------------------------new from here
+        this.current_action = true;
+        this.rightwalk = false;
+        this.leftwalk = false;
+        this.standing = false;
+        this.sittingRight = false;
+        this.sittingLeft = false;
+        this.weak_punch = false;
+        this.weak_kick = false;
+        this.strong_punch = false;
+        this.strong_kick = false;
+        if (this.jumping) {
+            this.jumpRight.elapsedTime = 0;
+            this.jumpLeft.elapsedTime = 0;
+            this.jumping = false;
+            this.y = this.ground;
+        }
+        if (this.isRight) {
+            console.log("Hit right");
+            if (this.x >= -50) {
+                this.x += -1;
+            }
 
+            if (this.syrym_low_punched_rightAnimation.isDone()) {
+                console.log("end of right hit animation");
+                this.syrym_low_punched_rightAnimation.elapsedTime = 0;
+                //this.standingLeft = true;
+                this.standing = true;
+                this.current_action = false;
+                this.gotHit = false;
+            }//add your animations accordingly both left and right hit animations
+        } else {
+            console.log("hit left");
+            if (this.x < 1100) {
+                this.x += 1;
+            }
+
+            if (this.syrym_low_punched_leftAnimation.isDone()) {
+                console.log("end of hit animation Left");
+                this.syrym_low_punched_leftAnimation.elapsedTime = 0;
+                this.standingLeft = true;
+                this.current_action = false;
+                this.gotHit = false;
+
+            }
+        }//<-------------------------to here 
+	}
         if (this.jumping) {
             var jumpDistance;
 
@@ -383,10 +448,10 @@ Syrym.prototype.update = function () {
             }
         }
 
-        if (this.rightwalk && this.x <= 1050) {// adjust bounds for your character walking off screen to right
+        if (this.rightwalk && this.x <= 1050) {
             this.x += 8;
 
-        } else if (this.leftwalk && this.x >= -150) {// adjust bound for your char for walking to left
+        } else if (this.leftwalk && this.x >= -150) {
             this.x -= 8;
 
         }
@@ -410,6 +475,12 @@ Syrym.prototype.draw = function (ctx) {
             this.syrym_jumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
         } else {
             this.syrym_leftjumpAnimation.drawFrame(this.game, ctx, this.x, this.y - 190);
+        }
+	} else if (this.gotHit) {//<-----------------------------------------------------------added hit animation here
+        if (this.isRight) {
+            this.syrym_low_punched_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
+        } else {
+            this.syrym_low_punched_rightAnimation.drawFrame(this.game, ctx, this.x, this.y - 150);
         }
     } else if (this.rightwalk) {
         this.syrym_rightwalkAnim.drawFrame(this.game, ctx, this.x, this.y - 150);
