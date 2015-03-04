@@ -194,8 +194,8 @@ GameEngine.prototype.getSelections = function () {
 
     this.ctx.canvas.addEventListener("click", function (e) {
         if (that.inMenu) {
-            console.log(Math.floor(e.clientX / 250));
-            that.setFighters(Math.floor(e.clientX / 250));
+            console.log(Math.floor(e.clientX /  337.5));
+            that.setFighters(Math.floor(e.clientX /  337.5));
         } else if (that.inMessage){//-----
             that.inMessage = false;
             that.inMenu = true;
