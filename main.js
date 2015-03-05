@@ -25,6 +25,7 @@ ASSET_MANAGER.queueDownload("./img/staircase.png");
 ASSET_MANAGER.queueDownload("./img/lifebarRIGHT.png");
 ASSET_MANAGER.queueDownload("./img/lifebarLEFT.png");
 ASSET_MANAGER.queueDownload("./img/green1.png");
+ASSET_MANAGER.queueDownload("./img/numbers.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
