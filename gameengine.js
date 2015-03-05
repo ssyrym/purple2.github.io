@@ -72,6 +72,8 @@ GameEngine.prototype.init = function (ctx) {
     this.surfaceHeight = this.ctx.canvas.height;
     this.startInput();
     this.timer = new Timer();
+    this.timebar = new TimeBar(ctx);
+
     console.log('game initialized');
 }
 
@@ -176,6 +178,7 @@ GameEngine.prototype.setFighters = function (selection) {
     this.addEntity(this.Opponent);
     this.addEntity(this.Fighter.bar);
     this.addEntity(this.Opponent.bar);
+    this.addEntity(this.timebar);
 
     console.log('Finished Selecting');
 
